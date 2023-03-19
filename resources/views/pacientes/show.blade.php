@@ -17,6 +17,10 @@ Paciente: {{$paciente->nombre}}
             <label for="nombre">Nombre</label>
             <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente-> nombre}}"required autofocus />
         </div>
+        <div class="py-12">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos"  value="{{$paciente-> apellidos}}"required autofocus />
+        </div>
 
         <div class="py-12">
             <label for="edad">Edad</label>
