@@ -13,7 +13,7 @@
     <form action="/pacientes" method="POST" role="form">
         {{ csrf_field()}}
         <div class="py-12">
-            <label for="name">Nombre</label>
+            <label required for="name">Nombre</label>
             <input type="text" class="form-control"  name="nombre" id="Escribe nombre paciente">
         </div>
 
@@ -39,17 +39,17 @@
         </div>
         <div class="py-12">
             <label for="fecha_entrada">Fecha entrada</label>
-            <input type="datetime-local" name="fecha_entrada" >
+            <input required type="datetime-local" name="fecha_entrada" >
         </div>
         
         <div class="py-12">
             <label for="fecha_salida">Fecha salida</label>
-            <input type="datetime-local" name="fecha_salida" >
+            <input required type="datetime-local" name="fecha_salida" >
         </div>
 
         <div class="py-12">
             <label for="estado_inicial">Estado inicial</label>
-            <select name="estado_inicial" id="estado_inicial">                
+            <select name="estado_inicial" id="estado_inicial" required>                
                 <option value="" disabled selected>{{'Elige una opción'}}</option>
                 <option value="Grave">Grave</option>
                 <option value="Agudo">Agudo</option>                
