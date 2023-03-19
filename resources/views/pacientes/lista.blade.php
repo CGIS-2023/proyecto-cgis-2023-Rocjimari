@@ -41,6 +41,7 @@
     <table> 
         <tr>
             <th>Nombre</th>
+            <th>Apellidos</th>
             <th>Sexo</th>
             <th>Edad</th>
             <th>Estado</th>
@@ -51,6 +52,7 @@
         @foreach($pacientes as $paciente)
             <tr>
                 <td>{{ $paciente->nombre }}</td>
+                <td>{{ $paciente->apellidos }}</td>
                 <td>{{ $paciente->sexo }}</td>
                 <td>{{ $paciente->edad }}</td>
                 <td>{{ $paciente->estado }}</td>
