@@ -14,12 +14,16 @@
         {{ csrf_field()}}
         <div class="py-12">
             <label required for="name">Nombre</label>
-            <input type="text" class="form-control"  name="nombre" id="Escribe nombre paciente">
+            <input type="text" class="form-control"  name="nombre" id="Escribe nombre paciente" placeholder="Escribe nombre paciente">
+        </div>
+        <div class="py-12">
+            <label required for="apellidos">Apellidos</label>
+            <input type="text" class="form-control"  name="apellidos" id="Escribe apellidos paciente" placeholder="Escribe apellidos paciente">
         </div>
 
         <div class="py-12">
             <label for="edad">Edad</label>
-            <input type="number" name="edad" id="edad" min="0">
+            <input type="number" name="edad" id="edad" min="0" placeholder="Escribe edad paciente">
         </div>        
         <div class="py-12">
             <label for="sexo">Sexo</label>
