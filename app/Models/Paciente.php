@@ -18,7 +18,6 @@ class Paciente extends Model
         'fecha_salida',
 
     ];
-    
 
     protected $hidden =[
         'id'
@@ -59,7 +58,7 @@ class Paciente extends Model
     }
 
     public function enfermedads(){
-        return $this->belongsToMany(Enfermedad::class)->withPivot('');
+        return $this->belongsToMany(Enfermedad::class)->withPivot('fecha_deteccion_enfermedad');
     }
     
 
