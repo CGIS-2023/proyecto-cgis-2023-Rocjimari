@@ -11,6 +11,7 @@ class Administrativo extends Model
     protected $fillable = [
         'nombre',
     ];
+    
     public function pacientes(){
         return $this->hasMany(Paciente::class);
     }
