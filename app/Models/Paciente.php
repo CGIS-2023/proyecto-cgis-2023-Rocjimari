@@ -12,7 +12,11 @@ class Paciente extends Model
         'nombre',
         'sexo',
         'edad',
-        'estado'
+        'estado',
+        'estado_inicial',
+        'fecha_entrada',
+        'fecha_salida',
+
     ];
     
 
@@ -22,6 +26,8 @@ class Paciente extends Model
 
     protected $casts = [
         'edad' => 'integer',
+        'fecha_entrada' => 'datetime:Y-m-d H:i:s',
+        'fecha_salida' => 'datetime:Y-m-d H:i:s',
     ];
     
     // //Listado de los pacientes de la tabla
