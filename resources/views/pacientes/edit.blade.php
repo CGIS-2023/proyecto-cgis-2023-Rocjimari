@@ -17,6 +17,10 @@ Editar Paciente: {{$paciente-> nombre}}
             <label for="">Nombre</label>
             <input type="text" name="nombre" value="{{$paciente-> nombre}}">
         </div>
+        <div class="py-12">
+            <label for="">Apellidos</label>
+            <input type="text" name="apellidos" value="{{$paciente-> apellidos}}">
+        </div>
 
         <div class="py-12">
             <label for="">Edad</label>
