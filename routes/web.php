@@ -18,7 +18,6 @@ Route::get('/', function () {
 });
 //Route::get('/pacientes','App\Http\Controllers\PacienteController@index')->name('paciente');
 // Route::get('/pacientes',[PacienteController::class,'index'])->name('pacientes.lista');;
-// Route::get('/pacientes/crear',[PacienteController::class,'create']);
 // Route::post('/pacientes/guardar', [PacienteController::class, 'store'])->name('pacientes.store');
 // Route::get('/medicos',[MedicoController::class,'index']);
 
