@@ -64,7 +64,7 @@
                         @csrf
                         @method('edit')
                     <button type="submit" class="flex items-center justify-end mt-4">Ver</button>
-                    </form>
+                    <br></form>
 
                     <form action="/pacientes/{{$paciente->id}}/edit">
                         @csrf
