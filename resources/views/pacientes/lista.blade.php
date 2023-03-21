@@ -103,6 +103,8 @@
     <div class="card-footer text-muted">
         <br>
         <a href="/pacientes/create">Nuevo paciente</a>
+        <br>
+        <a href="/">Inicio</a>
     </div>
         </div>
     </div>
