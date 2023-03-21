@@ -28,6 +28,11 @@
                     </button>
                 </div>
             @endif
+            
+            <div class="links">
+                    <a href="{{route('pacientes.index')}}">Pacientes</a>
+                    
+                </div>
         </form>
         </div>
     </div>
