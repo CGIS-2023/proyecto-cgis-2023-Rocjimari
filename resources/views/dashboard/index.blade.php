@@ -28,7 +28,8 @@
                     </button>
                 </div>
             @endif
-            
+            <br>
+            <h5>Tienes acceso a: </h5>
             <div class="links">
                     <a href="{{route('pacientes.index')}}">Pacientes</a>
                     
