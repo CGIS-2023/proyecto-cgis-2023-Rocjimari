@@ -29,15 +29,22 @@ Route::get('/', function () {
 Route::resource('pacientes',PacienteController::class);
 
 
+// Autentificacion
+Route::prefix('auth')->group(function(){
+    Route::get('login',[AuthController::class,'login'])->name('login'); 
+    // admin@admin.com -->password
+    Route::post('login',[AuthController::class,'loginVerify'])->name('login.verify');
+    Route::get('register',[AuthController::class,'register'])->name('register');
+    Route::post('register',[AuthController::class,'registerVerify']);   
+    //cerrar sesión
+    Route::post('cerrarSesion',[AuthController::class,'cerrarSesion'])->name('cerrarSesion');
 
-//Autentificacion
-Route::view('/login','login')->name('login');
-Route::view('/registro','register')->name('registro');
+
+});
 
 
-Route::view('/privada', "secret")->middleware('auth')->name('privada');
-//Middleware credenciales son correctas le deja a entrar sino se vuelve al login para iniciar sesion
-
-Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');
-Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware('auth')->group(function(){//autentificar usuario
+    Route::get('dashboard', function(){
+        return view('dashboard.index');
+    })->name('dashboard');
+});
