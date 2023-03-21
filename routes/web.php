@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PacienteController;
-use GuzzleHttp\Middleware;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
