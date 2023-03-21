@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('csss/app.css')}}">
+</head>
     <style>
         body {
             margin: auto;
@@ -36,19 +41,25 @@
     </style>
     </head>
     <body>
-    <h2>Listado Pacientes</h2>
-    <!-- <form methos="POST" action="/pacientes/crear"></form> -->
-    <table> 
+    <br>
+    <div class="card">
+        <div class="card-header">
+            Listado Pacientes
+        </div>
+        <div class="card-body">
+        <table >
         <tr>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Sexo</th>
-            <th>Edad</th>
-            <th>Estado</th>
-            <th>Fecha entrada</th>
-            <th>Fecha salida</th>
-            <th>Estado inicial</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Fecha entrada</th>
+            <th scope="col">Fecha salida</th>
+            <th scope="col">Estado inicial</th>
         </tr>
+        </thead>
+        <tbody>
         @foreach($pacientes as $paciente)
             <tr>
                 <td>{{ $paciente->nombre }}</td>
@@ -60,18 +71,18 @@
                 <td>{{ $paciente->fecha_salida }}</td>
                 <td>{{ $paciente->estado_inicial }}</td>
                 <td>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <form action="/pacientes/{{$paciente->id}}">
                         @csrf
                         @method('edit')
-                    <button type="submit" class="flex items-center justify-end mt-4">Ver</button>
-                    <br></form>
-
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>
+                        
+                    </form>
                     <form action="/pacientes/{{$paciente->id}}/edit">
                         @csrf
                         @method('edit')
-                    <button type="submit" class="flex items-center justify-end mt-4">Editar</button>
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Editar</button>
                     </form>
-
                     </form>
                     <form action="/pacientes/{{$paciente->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
                         @csrf
@@ -82,13 +93,21 @@
                                     return confirm("Do you want to delete this ?");
                                 });
                             </script>
-                        <button type="submit" class="flex items-center justify-end mt-4">Eliminar</button>
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Eliminar</button>
                     </form>
                 </td>
             </tr>
         @endforeach
-    </table> 
-    <br>
-    <a href="/pacientes/create">Nuevo paciente</a>
+        </tbody>
+    </table>
+    <div class="card-footer text-muted">
+        <br>
+        <a href="/pacientes/create">Nuevo paciente</a>
+    </div>
+        </div>
+    </div>
+    
+    
+    
     </body>
 </html>
