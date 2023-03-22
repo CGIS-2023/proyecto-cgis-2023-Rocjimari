@@ -15,7 +15,18 @@
         <div class="m-auto bg-white p-5 rounded-sm shadow-lg w-form">
 
             <h3 class="text-uppercase text-center">Bienvenido</h3>
-        <form action="{{route('cerrarSesion')}}" method="post">
+        <form action="{{route('logout')}}" method="post">
+        <br>
+            <h5>Tienes acceso a: </h5>
+            
+            <div class="card-footer text-muted">
+                <a href="/">Inicio</a>
+                <div class="links">
+                    <a href="{{route('pacientes.index')}}">Pacientes</a>
+                    
+                </div>
+            </div>
+            <br>
             @csrf
             <button type="submit" class="btn btn-primary btn-block">Cerrar sesión</button>
             @if (session('success'))
@@ -28,12 +39,7 @@
                     </button>
                 </div>
             @endif
-            <br>
-            <h5>Tienes acceso a: </h5>
-            <div class="links">
-                    <a href="{{route('pacientes.index')}}">Pacientes</a>
-                    
-                </div>
+            
         </form>
         </div>
     </div>
