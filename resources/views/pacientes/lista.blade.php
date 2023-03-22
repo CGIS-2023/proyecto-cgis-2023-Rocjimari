@@ -56,7 +56,8 @@
             <th scope="col">Estado</th>
             <th scope="col">Fecha entrada</th>
             <th scope="col">Fecha salida</th>
-            <th scope="col">Estado inicial</th>
+            <th scope="col">Estado inicial</th>            
+            <th scope="col">Opciones</th>
         </tr>
         </thead>
         <tbody>
