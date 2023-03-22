@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
 
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
 
         <!-- Styles -->
         <style>
@@ -66,19 +66,14 @@
     <br>
         <div class="flex-center position-ref full-height">
 
-            @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                    @if (Auth::check())
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-                        <!-- PARA LOGEARTE USAR
-                    User::create(['name' =>'Admin','email'=> 'admin@admin.com'
-                    , 'password' =>bcrypt('password')]) -->
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                        @endif
-                    @endauth
+        @if (Route::has('login') && Auth::check())
+                <div class="top-right links">
+                    <a href="{{ url('/dashboard') }}">Dashboard</a>
+                </div>
+            @elseif (Route::has('login') && !Auth::check())
+                <div class="top-right links">
+                    <a href="{{ url('/login') }}">Login</a>
+                    <a href="{{ url('/register') }}">Register</a>
                 </div>
             @endif
             <br>
@@ -98,12 +93,7 @@
 
                 </div>
                 <BR></BR>
-                <div>                
-                <form action="{{route('cerrarSesion')}}" method="post">
-                     @csrf
-                    <button type="submit" class="btn btn-primary btn-block">Cerrar sesión</button>
-                </div>
-
+                <div>
             </div>
                 </div>
             </div>
