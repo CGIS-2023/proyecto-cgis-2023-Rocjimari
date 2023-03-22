@@ -29,8 +29,8 @@ Editar Paciente: {{$paciente-> nombre}}
         <div class="py-12">
             <label for="sexo">Sexo</label>
             <select name="sexo" id="sexo">
-                <option value="mujer" {{($paciente->sexo == 'mujer')? 'selected': ''}}>Mujer</option>
-                <option value="hombre" {{($paciente->sexo == 'hombre')? 'selected': ''}}>Hombre</option>
+                <option value="Mujer" {{($paciente->sexo == 'Mujer')? 'selected': ''}}>Mujer</option>
+                <option value="Hombre" {{($paciente->sexo == 'Hombre')? 'selected': ''}}>Hombre</option>
             </select>
         </div>
         <div class="py-12">
