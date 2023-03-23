@@ -162,7 +162,7 @@ Para conocer más al paciente y a su enfermedad para seguir un tratamiento más 
     
 -   *RNF-002 Adaptabilidad*:  El sistema debe estar preparado para poderse ejecutar en diferentes sistemas.
     
--  **RNF-003 Disponibilidad**:  El sistema debe estar operativo todo el tiempo posible a bajo coste, para poder registrar todos los datos posibles.
+-  *RNF-003 Disponibilidad*:  El sistema debe estar operativo todo el tiempo posible a bajo coste, para poder registrar todos los datos posibles.
     
 -  *RNF-004 Facilidad de uso*:  El sistema debe tener una organización y un diseño sencillo para que pueda ser consultado por cualquier tipo de empleado del hospital, ya sean tanto administrativos como personal sanitario.
     
@@ -172,3 +172,5 @@ Para conocer más al paciente y a su enfermedad para seguir un tratamiento más 
 Modelo conceptual UML:(Al menos una relación N-N, una relación 1-1 y una  1-N.
 
 <img src="/img/Modelo UML.png" >
+
+Dirección del documento de requisitos(para ver el modelo UML): https://docs.google.com/document/d/1KWzQCoJ56L8cG21SlG2Qlf4AWrI7w3w6teefc7AZSNI/edit?usp=sharing
