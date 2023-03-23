@@ -173,3 +173,4 @@ Modelo conceptual UML:(Al menos una relación N-N, una relación 1-1 y una  1-N.
 
 <img src="{{ asset('public\img\Modelo UML.jpg') }}">
 ![Modelo UML]('public\img\Modelo UML.jpg')
+<img src="\\wsl.localhost\Ubuntu-22.04\home\rociojimenez\Code\proyecto-cgis-2023-Rocjimari\public\img\Modelo UML.jpg" style="width: 200px; height: 200px; border: 2px solid red">
