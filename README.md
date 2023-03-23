@@ -172,3 +172,4 @@ Para conocer más al paciente y a su enfermedad para seguir un tratamiento más 
 Modelo conceptual UML:(Al menos una relación N-N, una relación 1-1 y una  1-N.
 
 <img src="{{ asset('public\img\Modelo UML.jpg') }}">
+![Modelo UML]('public\img\Modelo UML.jpg')
