@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medico;
 use App\Models\Paciente;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
 {
@@ -14,9 +17,15 @@ class PacienteController extends Controller
     // }
 
 
-    public function index(){
-        
-        $pacientes = Paciente::all();
+    public function index(Paciente $paciente,User $user){
+        // dd(Auth::user()->tipo_usuario_id == 2);
+        if (Auth::user()->tipo_usuario_id == 2){
+            $pacientes = Auth::user()->medico->pacientes()->paginate(21);        
+        }
+        elseif(Auth::user()->tipo_usuario_id == 3){
+            $pacientes = Auth::user()->enfermero->pacientes()->paginate(21);
+
+        }
 
                         //->select('nombre','fecha_entrada')
                         //->where('estado','vivo')
@@ -24,6 +33,7 @@ class PacienteController extends Controller
                         //->get()
         return view('pacientes.lista',['pacientes' => $pacientes]);
     }
+
 
 
     public function create(){
