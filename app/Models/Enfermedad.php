@@ -16,6 +16,6 @@ class Enfermedad extends Model
         'frecuencia',
     ];
     public function pacientes(){
-        return $this->belongsToMany(Paciente::class)->withPivot('fecha_deteccion_enfermedad');
+        return $this->belongsToMany(Paciente::class)->withPivot('fecha_deteccion_enfermedad','fecha_alta_enfermedad');
     }
 }

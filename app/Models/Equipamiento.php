@@ -11,7 +11,6 @@ class Equipamiento extends Model
     protected $fillable =[
         'nombre',
         'tipo',
-        'estado',
         'localizacion',
     ];
     public function paciente(){

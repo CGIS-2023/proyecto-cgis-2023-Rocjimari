@@ -17,13 +17,10 @@ class Paciente extends Model
         'estado_inicial',
         'fecha_entrada',
         'fecha_salida',
+        'medico_id',
 
     ];
-
-    protected $hidden =[
-        'id'
-    ];
-
+    
     protected $casts = [
         'edad' => 'integer',
         'fecha_entrada' => 'datetime:Y-m-d H:i:s',
@@ -40,6 +37,8 @@ class Paciente extends Model
     // }
 
 /////////////////////////////////////////////////////
+
+
 
 
     public function cama(){
@@ -61,7 +60,14 @@ class Paciente extends Model
     public function enfermedads(){
         return $this->belongsToMany(Enfermedad::class)->withPivot('fecha_deteccion_enfermedad');
     }
-    
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+// 1 - N
+    public function medicos(){
+        return $this->belongsTo(Medico::class);
+    }
 
 
 

@@ -10,10 +10,15 @@ class Medico extends Model
     use HasFactory;
     protected $fillable = [
         'nombre',
-        'especialidad',
+        'apellidos',
+        
     ];
     public function pacientes(){
         return $this->hasMany(Paciente::class);
     }
-    
+
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -15,4 +15,7 @@ class Administrativo extends Model
     public function pacientes(){
         return $this->hasMany(Paciente::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
