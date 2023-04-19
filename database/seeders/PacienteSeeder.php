@@ -24,7 +24,8 @@ class PacienteSeeder extends Seeder
                'fecha_entrada' => '2021-05-30 10:15:00',               
                'fecha_salida' => '2021-05-30 10:15:00',
                'estado' => 'Vivo',
-               'estado_inicial' => 'Potencialmente recuperable'
+               'estado_inicial' => 'Potencialmente recuperable',
+               'medico_id' => 2,
 
            ],
            [
@@ -35,7 +36,9 @@ class PacienteSeeder extends Seeder
             'fecha_entrada' => '2021-05-30 10:15:00',               
             'fecha_salida' => '2021-05-30 10:15:00',
             'estado' => 'Vivo',
-            'estado_salud_inicial' => 'Agudo'
+            'estado_salud_inicial' => 'Agudo',
+            'medico_id' => 1,
+
 
             ],
             [
@@ -46,7 +49,9 @@ class PacienteSeeder extends Seeder
             'fecha_entrada' => '2021-05-30 10:15:00',               
             'fecha_salida' => '2021-05-30 10:15:00',
             'estado' => 'Muerto',
-            'estado_salud_inicial' => 'Grave'
+            'estado_salud_inicial' => 'Grave',
+            'medico_id' => 2,
+
 
             ],
             [
@@ -57,8 +62,9 @@ class PacienteSeeder extends Seeder
             'fecha_entrada' => '2021-05-30 10:15:00',               
             'fecha_salida' => '2021-05-30 10:15:00',
             'estado' => 'Muerto',
-            'estado_salud_inicial' => 'Potencialmente recuperable'
-    
+            'estado_salud_inicial' => 'Potencialmente recuperable',
+            'medico_id' => 2,
+
                 ],
         ]);
     }
