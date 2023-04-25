@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,3 +67,5 @@ Editar Paciente: {{$paciente-> nombre}}
     </form>
 </body>
 </html>
+
+</x-app-layout>
