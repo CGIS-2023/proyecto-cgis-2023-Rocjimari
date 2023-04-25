@@ -12,7 +12,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @if(in_array(Auth::user()->tipo_usuario_id, [3]))
+                    @if(Auth::user()->tipo_usuario_id == 3)
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
                         <x-nav-link href="/pacientes"   :active="request()->routeIs('pacientes.lista') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
                             {{ __('Mis Pacientes') }}
                         </x-nav-link>

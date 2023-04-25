@@ -53,7 +53,7 @@ class PacienteSeeder extends Seeder
             'estado' => 'Muerto',
             'estado_salud_inicial' => 'Grave',
             'medico_id' => 2,            
-            'enfermero_id' => 5,
+            'enfermero_id' => 4,
 
 
             ],
@@ -67,7 +67,7 @@ class PacienteSeeder extends Seeder
             'estado' => 'Muerto',
             'estado_salud_inicial' => 'Potencialmente recuperable',
             'medico_id' => 2,
-            'enfermero_id' => 5,
+            'enfermero_id' => 4,
 
                 ],
         ]);

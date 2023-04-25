@@ -11,7 +11,7 @@ class EnfermeroController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(Medico::class, 'medico');
+        $this->authorizeResource(Enfermero::class, 'enfermero');
     }
 
     public function index(){

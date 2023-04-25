@@ -21,7 +21,6 @@ return new class extends Migration
             $table->date('fecha_entrada');
             $table->date('fecha_salida');            
             $table->string('estado_inicial');
-         // $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->foreignId('enfermero_id');
             $table->foreignId('medico_id');
             $table->id();
