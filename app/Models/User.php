@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use App\Models\Medico;
-use App\Models\Paciente;
 use App\Models\Enfermero;
 use App\Models\Administrativo;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -55,12 +53,12 @@ class User extends Authenticatable
         if ($this->medico()->exists()){
             return 2;
         }
-        elseif($this->administrativo()->exists()){
-            return 1;
-        } 
         elseif($this->enfermero()->exists()){
             return 3;
         }
+        elseif($this->administrativo()->exists()){
+            return 1;
+        } 
         else{
             return 4;
         }

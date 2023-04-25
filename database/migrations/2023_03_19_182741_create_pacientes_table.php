@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellidos');
             $table->string('sexo');
-            $table->integer('edad');;
+            $table->integer('edad');
             $table->string('estado');
             $table->date('fecha_entrada');
             $table->date('fecha_salida');            
             $table->string('estado_inicial');
          // $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
+            $table->foreignId('enfermero_id');
             $table->foreignId('medico_id');
             $table->id();
             $table->timestamps();

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\EnfermeroController;
 use App\Http\Controllers\MedicoController;
 
 /*
@@ -58,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
         
         'pacientes' => PacienteController::class,
         'medicos' => MedicoController::class,
+        'enfermero' => EnfermeroController::class,
     ]);
 });
 // Route::middleware('auth')->group(function(){//autentificar usuario
