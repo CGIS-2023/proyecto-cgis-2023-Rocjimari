@@ -1,12 +1,14 @@
 <?php
 
+use App\Models\Enfermedad;
+use App\Models\Equipamiento;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EnfermeroController;
-use App\Http\Controllers\MedicoController;
-use App\Models\Enfermedad;
+use App\Http\Controllers\EquipamientoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +62,9 @@ Route::middleware(['auth'])->group(function () {
         
         'pacientes' => PacienteController::class,
         'medicos' => MedicoController::class,
-        'enfermero' => EnfermeroController::class,        
-        'enfermedad' => EnfermedadController::class,
+        'enfermeros' => EnfermeroController::class,       
+        'equipamientos' => EquipamientoController::class, 
+        // 'enfermedad' => EnfermedadController::class,
     ]);
 });
 // Route::middleware('auth')->group(function(){//autentificar usuario

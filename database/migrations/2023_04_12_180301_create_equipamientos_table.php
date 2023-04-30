@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('tipo');
+            $table->foreignId('paciente_id')->nullable();
+
             // $table->string('localizacion');
         });
     }

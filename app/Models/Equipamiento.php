@@ -11,6 +11,7 @@ class Equipamiento extends Model
     protected $fillable =[
         'nombre',
         'tipo',
+        'equipamiento_id'
         // 'localizacion',
     ];
     public function paciente(){

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('estado_inicial');
             $table->foreignId('enfermero_id')->nullable();
             $table->foreignId('medico_id')->nullable();
+
             $table->id();
             $table->timestamps();
            

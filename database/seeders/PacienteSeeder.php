@@ -54,6 +54,7 @@ class PacienteSeeder extends Seeder
             'estado_salud_inicial' => 'Grave',
             'medico_id' => 2,            
             'enfermero_id' => 2,
+            
 
 
             ],

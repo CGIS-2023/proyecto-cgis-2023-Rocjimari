@@ -19,6 +19,11 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
+
+        @if (Route::is('pacientes.show'))
+            @include('pacientes.navigationshow')
+        @endif
+
         <!-- Page Heading -->
         <header class="bg-white shadow">
             

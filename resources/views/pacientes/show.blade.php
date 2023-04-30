@@ -4,17 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion Paciente</title>
 </head>
-<body>
-Información Paciente
-<br> 
-Paciente: {{$paciente->nombre}}
 
-<div class="py-12">
+
+<body>
+<br> 
+    
+<div style="  position: relative; margin: 32px 16px;; padding: 60px 20px 16px;  border:2px solid #dad4ff; ;  border-radius: 10px;  background: #ffffff">
+    
+    <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #7f71d3;  border-radius: 5px;  background: #a59cd8a5;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
+    Paciente:  {{ $paciente->apellidos}} ,     {{$paciente->nombre}} 
+    </div>
+
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                
                 <div class="mt-4">
                     <x-label for="nombre">Nombre</x-label>
                     <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente-> nombre}}"required autofocus />
@@ -58,7 +64,9 @@ Paciente: {{$paciente->nombre}}
                     </select>        
                 </div>
             </div>
+            </div>
         </div>
+
 </div>
         <div class="flex items-center justify-end mt-4">
             <button type="button" class="bg-red-800 hover:bg-red-700">

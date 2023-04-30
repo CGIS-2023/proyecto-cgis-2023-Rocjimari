@@ -19,15 +19,18 @@ class EquipamientoSeeder extends Seeder
             [
                 'nombre' => "Monitor cardiorespiratorio",
                 'tipo' => 'Dispositivo de monitoreo' , 
+                'paciente_id' => 2
             ],
             [
                 'nombre' => "Respirador",
-                'tipo' => 'Aparato complejo' ,               
+                'tipo' => 'Aparato complejo' ,  
+                'paciente_id' => 2             
                 // 'localizacion' => 'Almacén',
             ],
             [
                 'nombre' => "Sonda pleural",
-                'tipo' => 'Aparato complejo' ,               
+                'tipo' => 'Aparato complejo' ,   
+                'paciente_id' => 1            
                 // 'localizacion' => 'Almacén',
             ],
         ]);
