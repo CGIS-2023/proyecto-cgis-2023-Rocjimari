@@ -6,6 +6,7 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EnfermeroController;
 use App\Http\Controllers\MedicoController;
+use App\Models\Enfermedad;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,8 @@ Route::middleware(['auth'])->group(function () {
         
         'pacientes' => PacienteController::class,
         'medicos' => MedicoController::class,
-        'enfermero' => EnfermeroController::class,
+        'enfermero' => EnfermeroController::class,        
+        'enfermedad' => EnfermedadController::class,
     ]);
 });
 // Route::middleware('auth')->group(function(){//autentificar usuario

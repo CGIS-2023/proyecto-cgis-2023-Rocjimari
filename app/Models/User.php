@@ -64,7 +64,7 @@ class User extends Authenticatable
         }
     }
     public function getTipoUsuarioAttribute(){
-        $tipos_usuario = [1 => trans('Administrativo'), 2 => trans('Médico'), 3 => trans('Enfermero'), 4 => trans('Administrador') ];
+        $tipos_usuario = [1 => trans('Administrativo'), 2 => trans('Médico'), 3 => trans('enfermero'), 4 => trans('Administrador') ];
         return $tipos_usuario[$this->tipo_usuario_id];
     }
 }

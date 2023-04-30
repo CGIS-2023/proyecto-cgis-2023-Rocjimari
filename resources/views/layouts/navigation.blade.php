@@ -18,13 +18,23 @@
                             </x-nav-link>
                         <x-nav-link href="/pacientes"   :active="request()->routeIs('pacientes.lista') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
                             {{ __('Mis Pacientes') }}
+                            
                         </x-nav-link>
-                    @elseif(Auth::user()->tipo_usuario_id == 2)
+                    @endif
+                    @if(Auth::user()->tipo_usuario_id == 2)
                             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
                             <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.lista') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
                             {{ __('Mis Pacientes') }}
+                            </x-nav-link>
+                    @endif
+                    @if(Auth::user()->tipo_usuario_id == 1)
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
+                            <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.lista') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
+                            {{ __('Pacientes') }}
                             </x-nav-link>
                     @endif
                 </div>

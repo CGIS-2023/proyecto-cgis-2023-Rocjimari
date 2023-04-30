@@ -11,7 +11,7 @@ class Equipamiento extends Model
     protected $fillable =[
         'nombre',
         'tipo',
-        'localizacion',
+        // 'localizacion',
     ];
     public function paciente(){
         return $this->belongTo(Equipamiento::class);

@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,37 +45,40 @@
     <br>
     <div class="card">
         <div class="card-header">
-            Listado Enfermeros
+            Listado Enfermedades
         </div>
         <div class="card-body">
         <table >
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>            
-            <th scope="col">Opciones</th>
-        </tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Clasificación</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Frecuencia</th>
         </thead>
         <tbody>
-        @foreach($enfermeros as $enfermero)
+        @foreach($pacientes as $paciente)
             <tr>
-                <td>{{ $enfermero->nombre }}</td>
-                <td>{{ $enfermero->apellidos }}</td>
-                
+                <td>{{ $enfermedad->nombre }}</td>
+                <td>{{ $enfermedad->tipo }}</td>
+                <td>{{ $enfermedad->clasificacion }}</td>
+                <td>{{ $enfermedad->origen }}</td>
+                <td>{{ $enfermedad->frecuencia }}</td>
                 <td>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <form action="/enfermeros/{{$enfermero->id}}">
+                    <!-- <form action="/pacientes/{{$paciente->id}}">
                         @csrf
                         @method('edit')
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>
                         
                     </form>
-                    <form action="/enfermeros/{{$enfermero->id}}/edit">
+                    <form action="/pacientes/{{$paciente->id}}/edit">
                         @csrf
                         @method('edit')
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Editar</button>
                     </form>
                     </form>
-                    <form action="/enfermeros/{{$enfermero->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
+                    <form action="/pacientes/{{$paciente->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
                         @csrf
                         @method('delete')
                         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -82,7 +86,7 @@
                                  $(".specialButton").click(function(){
                                     return confirm("Do you want to delete this ?");
                                 });
-                            </script>
+                            </script> -->
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Eliminar</button>
                     </form>
                 </td>
@@ -92,7 +96,7 @@
     </table>
     <div class="card-footer text-muted">
         <br>
-        <a href="/enfermeros/create">Nuevo enfermero</a>
+        <a href="/pacientes/create">Nueva Enfermedad</a>
         <br>
         <a href="/">Inicio</a>
     </div>
@@ -103,3 +107,4 @@
     
     </body>
 </html>
+</x-app-layout>

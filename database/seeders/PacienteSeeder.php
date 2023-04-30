@@ -26,7 +26,7 @@ class PacienteSeeder extends Seeder
                'estado' => 'Vivo',
                'estado_inicial' => 'Potencialmente recuperable',
                'medico_id' => 2,
-               'enfermero_id' => 4,
+               'enfermero_id' => 2,
 
            ],
            [
@@ -39,7 +39,7 @@ class PacienteSeeder extends Seeder
             'estado' => 'Vivo',
             'estado_salud_inicial' => 'Agudo',
             'medico_id' => 1,            
-            'enfermero_id' => 4,
+            'enfermero_id' => 2,
 
 
             ],
@@ -53,7 +53,7 @@ class PacienteSeeder extends Seeder
             'estado' => 'Muerto',
             'estado_salud_inicial' => 'Grave',
             'medico_id' => 2,            
-            'enfermero_id' => 4,
+            'enfermero_id' => 2,
 
 
             ],
@@ -67,9 +67,27 @@ class PacienteSeeder extends Seeder
             'estado' => 'Muerto',
             'estado_salud_inicial' => 'Potencialmente recuperable',
             'medico_id' => 2,
-            'enfermero_id' => 4,
+            'enfermero_id' => 2,
 
                 ],
         ]);
+        //     DB::table('enfermero_paciente')->insert([
+        //     [
+        //         'paciente_id' => 1,
+        //         'enfermero_id' => 1,
+        //         'inicio' => '2021-05-31',
+        //         'fin' => '2021-06-07',
+        //         'estado' => "Empeorado",
+        //         'comentarios' => 'El paciente sufrío una parada cardiaca ',
+        //     ],
+        //     [
+        //         'paciente_id' => 2,
+        //         'enfermero_id' => 1,
+        //         'inicio' => '2021-05-31',
+        //         'fin' => '2021-06-07',
+        //         'estado' => "Estable",
+        //         'comentarios' => 'El paciente tuvo una reacción alérgica a la amoxicilina ',
+        //     ],
+        // ]);
     }
 }

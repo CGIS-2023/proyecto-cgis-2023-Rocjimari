@@ -23,12 +23,12 @@ class EquipamientoSeeder extends Seeder
             [
                 'nombre' => "Respirador",
                 'tipo' => 'Aparato complejo' ,               
-                'localizacion' => 'm',
+                // 'localizacion' => 'Almacén',
             ],
             [
                 'nombre' => "Sonda pleural",
                 'tipo' => 'Aparato complejo' ,               
-                'localizacion' => 'Almacén',
+                // 'localizacion' => 'Almacén',
             ],
         ]);
     }

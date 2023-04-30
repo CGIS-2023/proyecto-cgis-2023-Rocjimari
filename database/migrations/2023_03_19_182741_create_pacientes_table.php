@@ -21,8 +21,8 @@ return new class extends Migration
             $table->date('fecha_entrada');
             $table->date('fecha_salida');            
             $table->string('estado_inicial');
-            $table->foreignId('enfermero_id');
-            $table->foreignId('medico_id');
+            $table->foreignId('enfermero_id')->nullable();
+            $table->foreignId('medico_id')->nullable();
             $table->id();
             $table->timestamps();
            

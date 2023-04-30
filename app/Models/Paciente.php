@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Medico;
+use App\Models\Enfermero;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Paciente extends Model
 {
@@ -42,25 +45,28 @@ class Paciente extends Model
 
 
 
-    public function cama(){
-        return $this->hasOne(Cama::class);
-    }
+    // public function cama(){
+    //     return $this->hasOne(Cama::class);
+    // }
 
     public function equipamientos(){
         return $this->hasMany(Equipamiento::class);
     }
 
-    public function Area_UCI(){
-        return $this->belongTo(Area_UCI::class);
-    }
-    
+    // public function Area_UCI(){
+    //     return $this->belongTo(Area_UCI::class);
+    // }
+ // N-N   
     // public function enfermeros(){
     //     return $this->belongsToMany(Enfermero::class)->withPivot('inicio','fin','notas','estado');
     // }
 
-    public function enfermedads(){
-        return $this->belongsToMany(Enfermedad::class)->withPivot('fecha_deteccion_enfermedad');
-    }
+    // public function enfermedads(){
+    //     return $this->belongsToMany(Enfermedad::class)->withPivot('fecha_deteccion_enfermedad');
+    // }
+
+
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -69,11 +75,13 @@ class Paciente extends Model
     public function medicos(){
         return $this->belongsTo(Medico::class);
     }
-// N-N
+
     public function enfermeros(){
         return $this->belongsTo(Enfermero::class);
     }
-
-
+// N-N
+    public function administrativos(){
+        return $this->belongsTo(Administrativo::class);
+    }
 
 }

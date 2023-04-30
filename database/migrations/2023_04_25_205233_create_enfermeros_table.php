@@ -14,12 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enfermeros', function (Blueprint $table) {
+            $table->string('nombre');
+            $table->string('apellidos');            
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->id();
             $table->timestamps();
-            $table->string('nombre');
-            $table->string('apellidos');
-            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
-
         });
     }
 

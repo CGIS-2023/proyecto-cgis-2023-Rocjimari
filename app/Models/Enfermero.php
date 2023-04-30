@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Paciente;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Enfermero extends Model
 {
@@ -14,9 +16,7 @@ class Enfermero extends Model
     ]; 
     
     // public function pacientes(){
-    //     return $this->belongsTo(Paciente::class);
-
-    //     // return $this->belongsToMany(Paciente::class)->withPivot('inicio','fin','notas','estado');
+    //     return $this->belongsToMany(Paciente::class)->withPivot('inicio','fin','notas','estado');
     // }
     public function pacientes(){
         return $this->hasMany(Paciente::class);

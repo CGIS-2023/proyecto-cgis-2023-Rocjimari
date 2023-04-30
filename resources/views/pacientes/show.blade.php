@@ -1,4 +1,4 @@
-
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,57 +12,54 @@ Información Paciente
 <br> 
 Paciente: {{$paciente->nombre}}
 
-<div>
-    <br>
-        <div class="py-12">
-            <label for="nombre">Nombre</label>
-            <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente-> nombre}}"required autofocus />
+<div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="mt-4">
+                    <x-label for="nombre">Nombre</x-label>
+                    <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente-> nombre}}"required autofocus />
+                </div>
+                <div class="mt-4">
+                    <x-label for="apellidos">Apellidos</x-label>
+                    <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos"  value="{{$paciente-> apellidos}}"required autofocus />
+                </div>
+                <div class="mt-4">
+                    <x-label for="edad">Edad</x-label>
+                    <input type="number" readonly disabled class="block mt-1 w-full" name="edad" value="{{$paciente-> edad}}"required autofocus min="0">
+                </div>        
+                <div class="mt-4">
+                    <x-label for="sexo">Sexo</x-label>
+                    <select readonly disabled class="block mt-1 w-full" name="sexo" id="sexo">
+                        <option value="mujer" {{($paciente->sexo == 'mujer')? 'selected': ''}}>Mujer</option>
+                        <option value="hombre" {{($paciente->sexo == 'hombre')? 'selected': ''}}>Hombre</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <x-label for="estado">Estado</x-label>
+                    <select readonly disabled class="block mt-1 w-full" name="estado" id="estado">
+                        <option value="vivo" {{($paciente->estado == 'vivo')? 'selected': ''}}>Vivo</option>
+                        <option value="muerto"{{($paciente->estado == 'muerto')? 'selected': ''}}>Muerto</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <x-label for="fecha_entrada">Fecha entrada</x-label>
+                    <input disabled type="datetime-local" name="fecha_entrada" value = "{{$paciente->fecha_entrada->format('Y-m-d\TH:i:s')}}">
+                </div>        
+                <div class="mt-4">
+                    <x-label for="fecha_salida">Fecha salida</x-label>
+                    <input disabled type="datetime-local" name="fecha_entrada" value = "{{$paciente->fecha_salida->format('Y-m-d\TH:i:s')}}" >
+                </div>
+                <div class="mt-4">
+                    <x-label for="estado_inicial">Estado inicial</x-label>
+                    <select readonly disabled name="estado_inicial" id="estado_inicial">                
+                        <option value="Grave" {{($paciente->estado_inicial == 'Grave')? 'selected' : ''}}>Grave</option>
+                        <option value="Agudo"{{($paciente->estado_inicial == 'Agudo')? 'selected' : ''}}>Agudo</option>                
+                        <option value="Potencialmente recuperable"{{($paciente->estado_inicial == 'Potencialmente recuperable')? 'selected' : ''}}>Potencialmente recuperable</option>
+                    </select>        
+                </div>
+            </div>
         </div>
-        <div class="py-12">
-            <label for="apellidos">Apellidos</label>
-            <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos"  value="{{$paciente-> apellidos}}"required autofocus />
-        </div>
-
-        <div class="py-12">
-            <label for="edad">Edad</label>
-            <input type="number" readonly disabled class="block mt-1 w-full" name="edad" value="{{$paciente-> edad}}"required autofocus min="0">
-        </div>        
-        <div class="py-12">
-            <label for="sexo">Sexo</label>
-            <select readonly disabled class="block mt-1 w-full" name="sexo" id="sexo">
-                <option value="mujer" {{($paciente->sexo == 'mujer')? 'selected': ''}}>Mujer</option>
-                <option value="hombre" {{($paciente->sexo == 'hombre')? 'selected': ''}}>Hombre</option>
-            </select>
-        </div>
-        <div class="py-12">
-            <label for="estado">Estado</label>
-            <select readonly disabled class="block mt-1 w-full" name="estado" id="estado">
-                <option value="vivo" {{($paciente->estado == 'vivo')? 'selected': ''}}>Vivo</option>
-                <option value="muerto"{{($paciente->estado == 'muerto')? 'selected': ''}}>Muerto</option>
-            </select>
-            
-        </div>
-        </div>
-        <div class="py-12">
-            <label for="fecha_entrada">Fecha entrada</label>
-            <input disabled type="datetime-local" name="fecha_entrada" value = "{{$paciente->fecha_entrada->format('Y-m-d\TH:i:s')}}">
-        </div>
-        
-        <div class="py-12">
-            <label for="fecha_salida">Fecha salida</label>
-            <input disabled type="datetime-local" name="fecha_entrada" value = "{{$paciente->fecha_salida->format('Y-m-d\TH:i:s')}}" >
-        </div>
-
-        <div class="py-12">
-            <label for="estado_inicial">Estado inicial</label>
-            <select readonly disabled name="estado_inicial" id="estado_inicial">                
-                <option value="Grave" {{($paciente->estado_inicial == 'Grave')? 'selected' : ''}}>Grave</option>
-                <option value="Agudo"{{($paciente->estado_inicial == 'Agudo')? 'selected' : ''}}>Agudo</option>                
-                <option value="Potencialmente recuperable"{{($paciente->estado_inicial == 'Potencialmente recuperable')? 'selected' : ''}}>Potencialmente recuperable</option>
-            </select>
-        
-        </div>
-        <br>
+</div>
         <div class="flex items-center justify-end mt-4">
             <button type="button" class="bg-red-800 hover:bg-red-700">
                 <a href={{route('pacientes.index')}}>
@@ -73,3 +70,4 @@ Paciente: {{$paciente->nombre}}
 
 </body>
 </html>
+</x-app-layout>

@@ -19,11 +19,15 @@ class PacienteController extends Controller
 
     public function index(Paciente $paciente,User $user){
         // dd(Auth::user()->tipo_usuario_id == 2);
-        if (Auth::user()->tipo_usuario_id == 2){
-            $pacientes = Auth::user()->medico->pacientes()->paginate(21);        
+        if (Auth::user()->tipo_usuario_id == 3){
+            $pacientes = Auth::user()->enfermero->pacientes()->paginate(21);     
         }
-        elseif(Auth::user()->tipo_usuario_id == 3){
-            $pacientes = Auth::user()->enfermero->pacientes()->paginate(21);
+        elseif(Auth::user()->tipo_usuario_id == 2){
+            $pacientes = Auth::user()->medico->pacientes()->paginate(21);   
+
+        }
+        elseif(Auth::user()->tipo_usuario_id == 1){
+            $pacientes = Paciente::all();  
 
         }
 
@@ -35,6 +39,15 @@ class PacienteController extends Controller
     }
 
 
+    // public function create(){
+    //     $enfermeros = Enfermero::all();
+    //     $pacientes = Paciente::all();
+    //     return view('pacientes.create');
+    //     if(Auth::user()->tipo_usuario_id == 1){
+    //         return view('pacientes/create', ['enfermero' => Auth::user()->enfermero, 'pacientes' => $pacientes]);
+    //     }
+    //     return view('pacientes/create', ['pacientes' => $pacientes, 'enfermeros' => $enfermeros]);
+    // }
 
     public function create(){
         return view('pacientes.create');
