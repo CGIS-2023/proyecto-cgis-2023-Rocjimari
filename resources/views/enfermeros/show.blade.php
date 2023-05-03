@@ -10,6 +10,7 @@
 <body>
 <br> 
 
+
 <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
     <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
     Enfermero: {{$enfermero->apellidos}},  {{$enfermero->nombre}}
@@ -18,7 +19,33 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    
+                @foreach($enfermero->pacientes as $paciente)
+                <tr>
+                
+                <td class="py-3 px-6 text-center whitespace-nowrap">
+                    <div class="flex items-center">
+                        <span class="font-medium">{{$paciente->pivot->inicio->format('d/m/Y')}} </span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-center whitespace-nowrap">
+                    <div class="flex items-center">
+                        <span class="font-medium">{{$paciente->pivot->fin->format('d/m/Y')}} </span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-center whitespace-nowrap">
+                    <div class="flex items-center">
+                        <span class="font-medium">{{$paciente->pivot->estado}} </span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-center whitespace-nowrap">
+                    <div class="flex items-center">
+                        <span class="font-medium">{{$paciente->pivot->notas}} </span>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+        
                     <div class="py-12">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre" 
@@ -29,8 +56,7 @@
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos" 
                         value="{{$enfermero-> apellidos}}"required autofocus />
                     </div>
-                    
-                    @include('layouts.navigationConsulta')
+
                 </div>
                 </div>
         </div>

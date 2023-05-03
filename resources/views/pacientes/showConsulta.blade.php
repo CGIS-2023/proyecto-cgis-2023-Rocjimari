@@ -9,6 +9,8 @@
 </head>
 <body>
 <br> 
+@include('layouts.navigationConsulta')
+
 
 <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
     <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
@@ -29,6 +31,35 @@
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos" 
                         value="{{$enfermero-> apellidos}}"required autofocus />
                     </div>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        @foreach ($paciente->enfermero as $enfermero)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                
+                                <td class="py-3 px-6 text-center whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{$enfermero->pivot->inicio->format('d/m/Y')}} </span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-center whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{$enfermero->pivot->fin->format('d/m/Y')}} </span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-center whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{$enfermero->pivot->estado}} </span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-center whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{$enfermero->pivot->notas}} </span>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        @endforeach
+
+                        </tbody>
                 </div>
                 </div>
         </div>

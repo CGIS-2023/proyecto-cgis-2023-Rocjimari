@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();            
             $table->text('notas')->nullable();
-            $table->date('inicio');
-            $table->date('fin');            
+            $table->dateTime('inicio');
+            $table->dateTime('fin');            
             $table->string('estado');
             $table->foreignId('paciente_id')->constrained()->onDelete('cascade');
             $table->foreignId('enfermero_id')->constraine;
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paciente_enfermero');
+        Schema::dropIfExists('enfermero_paciente');
     }
 };

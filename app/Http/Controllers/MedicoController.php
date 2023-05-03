@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medico;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class MedicoController extends Controller
@@ -16,6 +17,7 @@ class MedicoController extends Controller
     {
         $this->authorizeResource(Medico::class, 'medico');
     }
+    
 
 
     public function index(){
@@ -29,6 +31,7 @@ class MedicoController extends Controller
         return view('medicos.lista',['medicos' => $medicos]);
     }
 
+    
 
     public function create(){
         return view('medicos.create');

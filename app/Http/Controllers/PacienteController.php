@@ -50,8 +50,21 @@ class PacienteController extends Controller
     
         // Devolver la vista con la información de los enfermeros
         return view('enfermeros.index', ['enfermeros' => $enfermeros,'paciente' => $paciente]);
+        return view('enfermeros.show', ['enfermeros' => $enfermeros,'paciente' => $paciente]);
     }
 
+    public function mostrarMedico($id) {
+        // Obtener el paciente por su identificador
+        $paciente = Paciente::find($id);
+    
+        // dd($paciente->enfermeros);
+        // Obtener los enfermeros asignados al paciente
+        $medico = $paciente->medico;
+    
+        // Devolver la vista con la información de los enfermeros
+        return view('medicos.show', ['medico' => $medico,'paciente' => $paciente]);
+        
+    }
 
     // public function create(){
     //     $enfermeros = Enfermero::all();

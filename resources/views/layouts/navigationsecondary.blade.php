@@ -5,7 +5,16 @@
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @if(Auth::user()->tipo_usuario_id =2 )
+                    @if(Auth::user()->tipo_usuario_id == 3)
+                         <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.show')">
+                                {{ __('Información Paciente') }}
+                        </x-nav-link>
+
+                        <x-nav-link href="{{ route('pacientes.medico', ['id' => $paciente->id])}}" :active="request()->routeIs('medicos.show')">
+                            {{ __('Médico asignado') }}
+                        </x-nav-link>
+                    @endif
+                    @if(Auth::user()->tipo_usuario_id == 2)
                         <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.show')">
                                 {{ __('Información Paciente') }}
                         </x-nav-link>
@@ -13,8 +22,12 @@
                         <x-nav-link href="{{ route('pacientes.enfermeros', ['id' => $paciente->id])}}" :active="request()->routeIs('enfermeros.index')">
                             {{ __('Enfermeros') }}
                         </x-nav-link>
-                        
-                       
+                            
+                    @endif
+                    @if(Auth::user()->tipo_usuario_id == 1)
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-nav-link>
                     @endif
                     
                 </div>

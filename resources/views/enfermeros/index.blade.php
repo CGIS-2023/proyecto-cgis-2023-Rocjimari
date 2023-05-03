@@ -54,6 +54,9 @@
             <th scope="col">Apellidos</th>            
             <th scope="col">Opciones</th>
         </tr>
+                
+
+       
         </thead>
         <tbody>
         @foreach($enfermeros as $enfermero)

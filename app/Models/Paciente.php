@@ -72,7 +72,7 @@ class Paciente extends Model
     }
 
 // 1 - N
-    public function medicos(){
+    public function medico(){
         return $this->belongsTo(Medico::class);
     }
 

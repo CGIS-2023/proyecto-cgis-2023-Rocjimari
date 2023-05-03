@@ -80,3 +80,6 @@ Route::post('/pacientes/{paciente}/index-enfermero', [PacienteController::class,
 
 //enfermeros de los pacientes
 Route::get('pacientes/{id}/enfermeros',[ PacienteController::class, 'mostrarEnfermeros'])->name('pacientes.enfermeros');
+//medico del pacientes
+Route::get('pacientes/{id}/medico',[ PacienteController::class, 'mostrarMedico'])->name('pacientes.medico');
+
