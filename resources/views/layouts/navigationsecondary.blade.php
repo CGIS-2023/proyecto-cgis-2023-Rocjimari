@@ -3,17 +3,18 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(Auth::user()->tipo_usuario_id =2 )
                         <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.show')">
                                 {{ __('Información Paciente') }}
                         </x-nav-link>
-                        <x-nav-link href="/equipamientos"  :active="request()->routeIs('equipamientos.index')">
-                            {{ __('Equipamiento médico') }}
+
+                        <x-nav-link href="{{ route('pacientes.enfermeros', ['id' => $paciente->id])}}" :active="request()->routeIs('enfermeros.index')">
+                            {{ __('Enfermeros') }}
                         </x-nav-link>
-                            
+                        
+                       
                     @endif
                     
                 </div>

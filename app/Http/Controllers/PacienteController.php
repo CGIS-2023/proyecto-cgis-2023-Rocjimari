@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Medico;
 use App\Models\Paciente;
-use App\Models\User;
+use App\Models\Enfermero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,6 +37,19 @@ class PacienteController extends Controller
                         //->distenct()//para que no se repitan
                         //->get()
         return view('pacientes.lista',['pacientes' => $pacientes]);
+    }
+
+    
+    public function mostrarEnfermeros($id) {
+        // Obtener el paciente por su identificador
+        $paciente = Paciente::find($id);
+    
+        // dd($paciente->enfermeros);
+        // Obtener los enfermeros asignados al paciente
+        $enfermeros = $paciente->enfermeros()->paginate(21);
+    
+        // Devolver la vista con la información de los enfermeros
+        return view('enfermeros.index', ['enfermeros' => $enfermeros,'paciente' => $paciente]);
     }
 
 
@@ -74,9 +88,7 @@ class PacienteController extends Controller
         }
     
 
-    public function show($id){
-
-        $paciente = Paciente::find($id);
+    public function show(Paciente $paciente){
         return view('pacientes/show', ['paciente' => $paciente]);
         //devuelve paciente del id buscado 
     }
@@ -104,4 +116,35 @@ class PacienteController extends Controller
 
 
 }
+        public function attach_enfermero(Request $request, Paciente $paciente)
+        {
+            $this->validateWithBag('attach',$request, [
+                'enfermero_id' => 'required|exists:pacientes,id',
+                'inicio' => 'required|date',
+                'fin' => 'required|date|after:inicio',
+                'notas' => 'nullable|string',
+                'estado' => 'nullable|string',
+            ]);
+            $paciente->enfermeros()->attach($request->enfermero_id, [
+                'inicio' => $request->inicio,
+                'fin' => $request->fin,
+                'notas' => $request->notas,
+                'estado' => $request->estado
+            ]);
+            return redirect()->route('paciente.edit', $paciente->id);
+        }
+
+        public function detach_medicamento(Paciente $paciente, Enfermero $enfermero)
+        {
+            $paciente->enfermeros()->detach($enfermero->id);
+            return redirect()->route('paciente.edit', $paciente->id);
+        }
+
+        public function enfermeros($id)
+    {
+        $paciente = Paciente::find($id);
+        $enfermeros = $paciente->enfermeros;
+
+        return view('pacientes.enfermeros', compact('paciente', 'enfermeros'));
+    }
 }

@@ -1,3 +1,4 @@
+
 <x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +9,12 @@
 
 
 <body>
+    
+    @include('layouts.navigationsecondary')
+      
 <br> 
     
 <div style="  position: relative; margin: 32px 16px;; padding: 60px 20px 16px;  border:2px solid #dad4ff; ;  border-radius: 10px;  background: #ffffff">
-    
     <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #7f71d3;  border-radius: 5px;  background: #a59cd8a5;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
     Paciente:  {{ $paciente->apellidos}} ,     {{$paciente->nombre}} 
     </div>

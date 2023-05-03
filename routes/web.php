@@ -69,3 +69,14 @@ Route::middleware(['auth'])->group(function () {
 });
 // Route::middleware('auth')->group(function(){//autentificar usuario
 
+    // Route::get('/pacientes/{paciente_id}/equipamientos', [EquipamientoController::class, 'show'])->name('equipamiento.show');
+    Route::get('equipamiento/{id}', [EquipamientoController::class, 'show'])->name('equipamiento.show');
+
+//Obtener enfermedades de un paciente
+// Route::get('/pacientes/{paciente}/enfermedades', [PacienteController::class, 'enfermedades'])->name('pacientes.enfermedades');
+
+Route::post('/pacientes/{paciente}/index-enfermero', [PacienteController::class, 'attach_enfermero'])
+->name('pacientes.attachEnfermero');
+
+//enfermeros de los pacientes
+Route::get('pacientes/{id}/enfermeros',[ PacienteController::class, 'mostrarEnfermeros'])->name('pacientes.enfermeros');

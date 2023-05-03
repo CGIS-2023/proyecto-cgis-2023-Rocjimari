@@ -72,23 +72,32 @@ class PacienteSeeder extends Seeder
 
                 ],
         ]);
-        //     DB::table('enfermero_paciente')->insert([
-        //     [
-        //         'paciente_id' => 1,
-        //         'enfermero_id' => 1,
-        //         'inicio' => '2021-05-31',
-        //         'fin' => '2021-06-07',
-        //         'estado' => "Empeorado",
-        //         'comentarios' => 'El paciente sufrío una parada cardiaca ',
-        //     ],
-        //     [
-        //         'paciente_id' => 2,
-        //         'enfermero_id' => 1,
-        //         'inicio' => '2021-05-31',
-        //         'fin' => '2021-06-07',
-        //         'estado' => "Estable",
-        //         'comentarios' => 'El paciente tuvo una reacción alérgica a la amoxicilina ',
-        //     ],
-        // ]);
+        
+            DB::table('enfermero_paciente')->insert([
+            [
+                'paciente_id' => 1,
+                'enfermero_id' => 2,
+                'inicio' => '2021-05-31',
+                'fin' => '2021-06-07',
+                'estado' => "Empeoramiento",
+                'notas' => 'El paciente sufrío una parada cardiaca ',
+            ],
+            [
+                'paciente_id' => 2,
+                'enfermero_id' => 2,
+                'inicio' => '2021-05-31',
+                'fin' => '2021-06-07',
+                'estado' => "Continua estable",
+                'notas' => 'El paciente tuvo una reacción alérgica a la amoxicilina ',
+            ],
+            [
+                'paciente_id' => 2,
+                'enfermero_id' => 1,
+                'inicio' => '2021-05-31',
+                'fin' => '2021-06-07',
+                'estado' => "Continua estable",
+                'notas' => 'El paciente mejora progresivamente ',
+            ],
+        ]);
     }
 }

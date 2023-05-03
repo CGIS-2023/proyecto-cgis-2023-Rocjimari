@@ -57,9 +57,9 @@ class Paciente extends Model
     //     return $this->belongTo(Area_UCI::class);
     // }
  // N-N   
-    // public function enfermeros(){
-    //     return $this->belongsToMany(Enfermero::class)->withPivot('inicio','fin','notas','estado');
-    // }
+    public function enfermeros(){
+        return $this->belongsToMany(Enfermero::class)->withPivot('inicio','fin','notas','estado');
+    }
 
     // public function enfermedads(){
     //     return $this->belongsToMany(Enfermedad::class)->withPivot('fecha_deteccion_enfermedad');
@@ -76,9 +76,9 @@ class Paciente extends Model
         return $this->belongsTo(Medico::class);
     }
 
-    public function enfermeros(){
-        return $this->belongsTo(Enfermero::class);
-    }
+    // public function enfermeros(){
+    //     return $this->belongsTo(Enfermero::class);
+    // }
 // N-N
     public function administrativos(){
         return $this->belongsTo(Administrativo::class);

@@ -17,4 +17,8 @@ class Equipamiento extends Model
     public function paciente(){
         return $this->belongTo(Equipamiento::class);
     }
+    public function obtenerEquipamientoPorPaciente($paciente_id)
+    {
+        return $this->where('paciente_id', $paciente_id)->get();
+    }
 }

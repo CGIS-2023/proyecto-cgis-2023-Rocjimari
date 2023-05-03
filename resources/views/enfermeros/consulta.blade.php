@@ -29,8 +29,6 @@
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos" 
                         value="{{$enfermero-> apellidos}}"required autofocus />
                     </div>
-                    
-                    @include('layouts.navigationConsulta')
                 </div>
                 </div>
         </div>

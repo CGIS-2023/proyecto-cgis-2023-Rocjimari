@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paciente;
 use App\Models\Enfermero;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,10 @@ class EnfermeroController extends Controller
 {
     
 
-    public function __construct()
-    {
-        $this->authorizeResource(Enfermero::class, 'enfermero');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Enfermero::class, 'enfermero');
+    // }
 
     public function index(){
         
@@ -24,7 +25,6 @@ class EnfermeroController extends Controller
                         //->get()
         return view('enfermeros.lista',['enfermeros' => $enfermeros]);
     }
-
 
     public function create(){
         return view('enfermeros.create');
@@ -66,4 +66,5 @@ class EnfermeroController extends Controller
 
 
 }
+        
 }

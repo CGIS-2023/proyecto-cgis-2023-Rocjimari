@@ -15,14 +15,15 @@ class Enfermero extends Model
         'apellidos',
     ]; 
     
-    // public function pacientes(){
-    //     return $this->belongsToMany(Paciente::class)->withPivot('inicio','fin','notas','estado');
-    // }
     public function pacientes(){
-        return $this->hasMany(Paciente::class);
+        return $this->belongsToMany(Paciente::class)->using(PacienteEnfermeroPivot::class)->withPivot('inicio','fin','notas','estado');
     }
+    // public function pacientes(){
+    //     return $this->hasMany(Paciente::class);
+    // }
     
     public function user(){
         return $this->belongsTo(User::class);
     }
+    
 }
