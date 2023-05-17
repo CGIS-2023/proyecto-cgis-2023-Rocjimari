@@ -40,6 +40,8 @@ class EnfermeroController extends Controller
     }
 
     public function show(Request $request,Enfermero $enfermero){
+
+        
         $pacienteId = $request->input('paciente_id');
         $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
         // dd($pacientes);

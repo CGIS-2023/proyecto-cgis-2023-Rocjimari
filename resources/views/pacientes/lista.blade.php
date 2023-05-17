@@ -63,7 +63,10 @@
         </thead>
         <tbody>
         @foreach($pacientes as $paciente)
+            
             <tr>
+            
+
                 <td>{{ $paciente->nombre }}</td>
                 <td>{{ $paciente->apellidos }}</td>
                 <td>{{ $paciente->sexo }}</td>
@@ -74,7 +77,8 @@
                 <td>{{ $paciente->estado_inicial }}</td>
                 <td>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <form action="/pacientes/{{$paciente->id}}">
+                  
+                <form action="/pacientes/{{$paciente->id}}">
                         @csrf
                         @method('edit')
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>

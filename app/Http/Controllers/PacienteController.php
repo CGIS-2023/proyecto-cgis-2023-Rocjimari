@@ -23,7 +23,8 @@ class PacienteController extends Controller
         // dd($paciente->user);
         // dd(Auth::user()->enfermero->id);
         if (Auth::user()->tipo_usuario_id == 3){
-            $pacientes = Auth::user()->enfermero->pacientes()->paginate(21);
+            $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
+            // dd($pacientes);
             $id = Auth::user()->enfermero->id;
         }
         elseif(Auth::user()->tipo_usuario_id == 2){
