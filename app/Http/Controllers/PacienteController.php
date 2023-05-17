@@ -19,9 +19,12 @@ class PacienteController extends Controller
 
 
     public function index(Paciente $paciente,User $user){
-        // dd(Auth::user()->tipo_usuario_id == 2);
+        // dd($paciente->user()->id);
+        // dd($paciente->user);
+        // dd(Auth::user()->enfermero->id);
         if (Auth::user()->tipo_usuario_id == 3){
-            $pacientes = Auth::user()->enfermero->pacientes()->paginate(21);     
+            $pacientes = Auth::user()->enfermero->pacientes()->paginate(21);
+            $id = Auth::user()->enfermero->id;
         }
         elseif(Auth::user()->tipo_usuario_id == 2){
             $pacientes = Auth::user()->medico->pacientes()->paginate(21);   
@@ -36,7 +39,7 @@ class PacienteController extends Controller
                         //->where('estado','vivo')
                         //->distenct()//para que no se repitan
                         //->get()
-        return view('pacientes.lista',['pacientes' => $pacientes]);
+        return view('pacientes.lista',['pacientes' => $pacientes, 'id' => $id]);
     }
 
     
@@ -44,7 +47,7 @@ class PacienteController extends Controller
         // Obtener el paciente por su identificador
         $paciente = Paciente::find($id);
     
-        // dd($paciente->enfermeros);
+        
         // Obtener los enfermeros asignados al paciente
         $enfermeros = $paciente->enfermeros()->paginate(21);
     
@@ -52,6 +55,7 @@ class PacienteController extends Controller
         return view('enfermeros.index', ['enfermeros' => $enfermeros,'paciente' => $paciente]);
         return view('enfermeros.show', ['enfermeros' => $enfermeros,'paciente' => $paciente]);
     }
+  
 
     public function mostrarMedico($id) {
         // Obtener el paciente por su identificador
@@ -102,6 +106,7 @@ class PacienteController extends Controller
     
 
     public function show(Paciente $paciente){
+        // dd($paciente);
         return view('pacientes/show', ['paciente' => $paciente]);
         //devuelve paciente del id buscado 
     }

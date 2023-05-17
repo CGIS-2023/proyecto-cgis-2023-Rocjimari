@@ -44,8 +44,11 @@
     <body>
     <br>
     <div class="card">
+        
+        @if (Auth::user()->tipo_usuario_id == 3)
+
         <div class="card-header">
-            Listado Enfermeros
+            Listado Consultas
         </div>
         <div class="card-body">
         <table >
@@ -59,7 +62,41 @@
        
         </thead>
         <tbody>
-        @foreach($enfermeros as $enfermero)
+        @isset($enfermeros)
+            <tr>
+                <td>{{ $enfermeros->nombre }}</td>
+                <td>{{ $enfermeros->apellidos }}</td>
+                
+                <td>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <form action="/enfermeros/{{$enfermeros->id}}">
+                        @csrf
+                        @method('edit')
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>
+                        
+                    </form>
+                    
+                </td>
+            </tr>
+            @endisset
+            @endif
+            @if (Auth::user()->tipo_usuario_id == 2)
+            <div class="card-header">
+                Listado Enfermeros
+            </div>
+            <div class="card-body">
+            <table >
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>            
+                <th scope="col">Opciones</th>
+            </tr>
+                    
+
+        
+            </thead>
+            <tbody>
+            @foreach($enfermeros as $enfermero)
             <tr>
                 <td>{{ $enfermero->nombre }}</td>
                 <td>{{ $enfermero->apellidos }}</td>
@@ -91,9 +128,13 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @endforeach
+            @endif
+
         </tbody>
     </table>
+
+    
     <div class="card-footer text-muted">
         <br>
         <a href="/enfermeros/create">Nuevo enfermero</a>

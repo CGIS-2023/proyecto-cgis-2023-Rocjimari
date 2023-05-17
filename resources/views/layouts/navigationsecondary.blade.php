@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
+    <!-- Secondary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -9,8 +9,7 @@
                          <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.show')">
                                 {{ __('Información Paciente') }}
                         </x-nav-link>
-
-                        <x-nav-link href="{{ route('pacientes.medico', ['id' => $paciente->id])}}" :active="request()->routeIs('medicos.show')">
+                        <x-nav-link href="{{ route('pacientes.medico', ['paciente' => $paciente->id])}}" :active="request()->routeIs('pacientes.medico')">
                             {{ __('Médico asignado') }}
                         </x-nav-link>
                     @endif
@@ -19,7 +18,7 @@
                                 {{ __('Información Paciente') }}
                         </x-nav-link>
 
-                        <x-nav-link href="{{ route('pacientes.enfermeros', ['id' => $paciente->id])}}" :active="request()->routeIs('enfermeros.index')">
+                        <x-nav-link href="{{ route('pacientes.enfermeros', ['paciente' => $paciente->id])}}" :active="request()->routeIs('enfermeros.index')">
                             {{ __('Enfermeros') }}
                         </x-nav-link>
                             

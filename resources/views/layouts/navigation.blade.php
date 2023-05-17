@@ -15,10 +15,12 @@
                     @if(Auth::user()->tipo_usuario_id == 3)
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
-                            </x-nav-link>
-                        <x-nav-link href="/pacientes"   :active="request()->routeIs('pacientes.lista') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
+                        </x-nav-link>
+                        <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.lista')">
                             {{ __('Mis Pacientes') }}
-                            
+                        </x-nav-link>
+                        <x-nav-link href="/enfermeros/{{Auth::user()->enfermero->id}}"  :active="request()->routeIs('enfermeros.show')">
+                            {{ __('Mis Consultas') }}
                         </x-nav-link>
                     @endif
                     @if(Auth::user()->tipo_usuario_id == 2)

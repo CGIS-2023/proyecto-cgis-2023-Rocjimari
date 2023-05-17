@@ -8,44 +8,60 @@
     
 </head>
 <body>
-<br> 
+    
 
+
+
+
+@if (Auth::user()->tipo_usuario_id == 3)
+
+@foreach($pacientes as $paciente)
+@once(!@include('layouts.navigationsecondary')== true)
+    @include('layouts.navigationsecondary')
+@endonce
 
 <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
     <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
-    Enfermero: {{$enfermero->apellidos}},  {{$enfermero->nombre}}
+    Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
     </div>
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                @foreach($enfermero->pacientes as $paciente)
-                <tr>
                 
-                <td class="py-3 px-6 text-center whitespace-nowrap">
-                    <div class="flex items-center">
-                        <span class="font-medium">{{$paciente->pivot->inicio->format('d/m/Y')}} </span>
-                    </div>
-                </td>
-                <td class="py-3 px-6 text-center whitespace-nowrap">
-                    <div class="flex items-center">
-                        <span class="font-medium">{{$paciente->pivot->fin->format('d/m/Y')}} </span>
-                    </div>
-                </td>
-                <td class="py-3 px-6 text-center whitespace-nowrap">
-                    <div class="flex items-center">
-                        <span class="font-medium">{{$paciente->pivot->estado}} </span>
-                    </div>
-                </td>
-                <td class="py-3 px-6 text-center whitespace-nowrap">
-                    <div class="flex items-center">
-                        <span class="font-medium">{{$paciente->pivot->notas}} </span>
-                    </div>
-                </td>
-            </tr>
+                <tr>
+         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                
+                
+                <div class="flex items-center">
+                    <x-label for="inicio">Inicio</x-label>
+                    <input disabled type="datetime" name="fecha_entrada" value = "{{$paciente->pivot->inicio->format('d/m/Y')}}" >
+                </div>
+                <div class="flex items-center">
+                    <x-label for="fin">Fin</x-label>
+                    <input disabled type="datetime" name="fecha_entrada" value = "{{$paciente->pivot->fin->format('d/m/Y')}}" >
+                </div>
+                <div class="mt-4">
+                    <x-label for="estado">Estado</x-label>
+                    <input class="block mt-1 w-full" type="text"   readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->estado}}"required autofocus />
+                </div>
+                <div class="mt-4">
+                    <x-label for="notas">Notas</x-label>
+                    <input class="block mt-1 w-full" type="text"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->notas}}"required autofocus />
+                </div>
+
+            </div>
+            </div>
+        </div>
+        </tbody>     
+        </div>
+   
         @endforeach
-        </tbody>
+        @endif
+
+
+
         
+        @if (Auth::user()->tipo_usuario_id == 2)
                     <div class="py-12">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre" 
@@ -60,7 +76,7 @@
                 </div>
                 </div>
         </div>
-
+        @endif
 
        
         <br>

@@ -79,7 +79,11 @@ Route::post('/pacientes/{paciente}/index-enfermero', [PacienteController::class,
 ->name('pacientes.attachEnfermero');
 
 //enfermeros de los pacientes
-Route::get('pacientes/{id}/enfermeros',[ PacienteController::class, 'mostrarEnfermeros'])->name('pacientes.enfermeros');
+Route::get('pacientes/{paciente}/enfermeros',[ PacienteController::class, 'mostrarEnfermeros'])->name('pacientes.enfermeros');
 //medico del pacientes
-Route::get('pacientes/{id}/medico',[ PacienteController::class, 'mostrarMedico'])->name('pacientes.medico');
+Route::get('pacientes/{paciente}/medico',[ PacienteController::class, 'mostrarMedico'])->name('pacientes.medico');
+//Consultas de enfermero a un paciente específico
+// Route::get('pacientes/{paciente}/enfermeros/{id}',[ EnfermeroController::class, 'consultaEnfermero'])->name('pacientes.enfermeroConsulta');
+
+// Route::get('enfermeros/{paciente}/{enfermero}', [EnfermeroController::class, 'showEnfermeroPaciente'])->name('ruta.enfermeros');
 

@@ -96,7 +96,19 @@
                                 });
                             </script>
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Eliminar</button>
-                    </form>
+                    </form>  
+                    
+                        @if (Auth::user()->tipo_usuario_id == 3)
+                        <form action="/enfermeros/{{$id}}" method="GET">
+                            @csrf
+                            <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Consulta</button>
+                        </form>
+                          
+                        @endif
+                        
+
+                    <br>
                 </td>
             </tr>
         @endforeach

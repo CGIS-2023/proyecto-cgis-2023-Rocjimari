@@ -88,6 +88,14 @@ class PacienteSeeder extends Seeder
                 'inicio' => '2021-05-31 10:01:00',
                 'fin' => '2021-06-07 10:15:00',
                 'estado' => "Continua estable",
+                'notas' => 'El paciente continua estable ',
+            ],
+            [
+                'paciente_id' => 2,
+                'enfermero_id' => 2,
+                'inicio' => '2021-05-31 10:01:00',
+                'fin' => '2021-06-07 10:15:00',
+                'estado' => "Empeoramiento",
                 'notas' => 'El paciente tuvo una reacción alérgica a la amoxicilina ',
             ],
             [

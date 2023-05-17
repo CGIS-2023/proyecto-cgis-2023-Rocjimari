@@ -16,7 +16,7 @@ class EnfermeroSeeder extends Seeder
     public function run() {
         DB::table('enfermeros')->insert([
         [
-            'nombre' => "Juani",
+            'nombre' => "Juan Antonia",
             'apellidos' => 'Durán Sal' ,
             'user_id' => 4,
 
