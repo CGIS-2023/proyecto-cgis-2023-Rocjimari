@@ -81,10 +81,10 @@ class EnfermeroController extends Controller
         // dd($request->input());
         // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
         
-        $pacientes = $enfermero->pacientes->where('id',$pacienteId);
-        $pacientes = $pacientes->filter(function ($paciente) use ($inicio) {
-            return $paciente->pivot->inicio == $inicio;
-        });
+        $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->get();
+        // $pacientes = $pacientes->filter(function ($paciente) use ($inicio) {
+        //     return $paciente->pivot->inicio == $inicio;
+        // });
         
 
         // dd($pacientes);
