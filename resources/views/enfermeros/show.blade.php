@@ -32,13 +32,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 
                 
-                <div class="flex items-center">
+                <div class="mt-4">
                     <x-label for="inicio">Inicio</x-label>
-                    <input disabled type="datetime" name="fecha_entrada" value = "{{$paciente->pivot->inicio->format('d/m/Y')}}" >
+                    <input disabled type="datetime-local" name="inicio" value = "{{$paciente->pivot->inicio->format('Y-m-d\TH:i:s')}}" >
                 </div>
-                <div class="flex items-center">
+                <div class="mt-4">
                     <x-label for="fin">Fin</x-label>
-                    <input disabled type="datetime" name="fecha_entrada" value = "{{$paciente->pivot->fin->format('d/m/Y')}}" >
+                    <input disabled type="datetime-local" name="fin" value = "{{$paciente->pivot->fin->format('Y-m-d\TH:i:s')}}" >
                 </div>
                 <div class="mt-4">
                     <x-label for="estado">Estado</x-label>
@@ -48,6 +48,7 @@
                     <x-label for="notas">Notas</x-label>
                     <input class="block mt-1 w-full" type="text"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->notas}}"required autofocus />
                 </div>
+                
 
             </div>
             </div>
@@ -86,7 +87,14 @@
                 {{ __('Volver al listado') }}
                 </a>
             </button>
+        
+        <form action={{route('enfermeros.edit', $enfermero->id)}} method="GET">
+            @csrf
+            <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Editar</button>
+        </form>
         </div>
+        
     
 
 </body>

@@ -26,6 +26,8 @@ class PacienteController extends Controller
             $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
             // dd($pacientes);
             $id = Auth::user()->enfermero->id;
+            
+
         }
         elseif(Auth::user()->tipo_usuario_id == 2){
             $pacientes = Auth::user()->medico->pacientes()->paginate(21);   
@@ -43,6 +45,15 @@ class PacienteController extends Controller
         return view('pacientes.lista',['pacientes' => $pacientes, 'id' => $id]);
     }
 
+    public function count(){
+        if (Auth::user()->tipo_usuario_id == 3){
+            $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
+            $countp = $pacientes->count();
+    }
+    return view('profile.dashboard',['count' => $countp]);
+
+    }   
+        
     
     public function mostrarEnfermeros($id) {
         // Obtener el paciente por su identificador
@@ -106,6 +117,7 @@ class PacienteController extends Controller
         }
     
 
+    
     public function show(Paciente $paciente){
         // dd($paciente);
         return view('pacientes/show', ['paciente' => $paciente]);

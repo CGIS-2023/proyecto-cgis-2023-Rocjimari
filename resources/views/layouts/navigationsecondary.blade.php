@@ -6,7 +6,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(Auth::user()->tipo_usuario_id == 3)
-                         <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.show')">
+                         <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.show') or request()->routeIs('enfermeros.show')">
                                 {{ __('Información Paciente') }}
                         </x-nav-link>
                         <x-nav-link href="{{ route('pacientes.medico', ['paciente' => $paciente->id])}}" :active="request()->routeIs('pacientes.medico')">

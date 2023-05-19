@@ -103,7 +103,7 @@ class PacienteSeeder extends Seeder
                 'enfermero_id' => 1,
                 'inicio' => '2021-05-31 16:15:00',
                 'fin' => '2021-06-07 16:30:00',
-                'estado' => "Continua estable",
+                'estado' => "En tratamiento",
                 'notas' => 'El paciente mejora progresivamente ',
             ],
         ]);

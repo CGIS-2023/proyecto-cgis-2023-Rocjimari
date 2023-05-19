@@ -21,7 +21,7 @@ return new class extends Migration
             $table->dateTime('fin');            
             $table->string('estado');
             $table->foreignId('paciente_id')->constrained()->onDelete('cascade');
-            $table->foreignId('enfermero_id')->constraine;
+            $table->foreignId('enfermero_id')->constrained()->onDelete('cascade');
         });
     }
 

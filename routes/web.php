@@ -7,6 +7,7 @@ use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnfermeroController;
 use App\Http\Controllers\EquipamientoController;
 
@@ -85,5 +86,11 @@ Route::get('pacientes/{paciente}/medico',[ PacienteController::class, 'mostrarMe
 //Consultas de enfermero a un paciente específico
 // Route::get('pacientes/{paciente}/enfermeros/{id}',[ EnfermeroController::class, 'consultaEnfermero'])->name('pacientes.enfermeroConsulta');
 
-// Route::get('enfermeros/{paciente}/{enfermero}', [EnfermeroController::class, 'showEnfermeroPaciente'])->name('ruta.enfermeros');
+Route::get('dashboard', [DashboardController::class, 'count'])->name('dashboard');
+
+//
+Route::post('/enfermeros/{enfermero}/attach-paciente', [EnfermeroController::class, 'attach_paciente'])
+        ->name('enfermeros.attachPaciente');
+Route::delete('/enfermeros/{enfermero}/detach-paciente/{paciente}', [EnfermeroController::class, 'detach_paciente'])
+        ->name('enfermeros.detachPaciente');
 
