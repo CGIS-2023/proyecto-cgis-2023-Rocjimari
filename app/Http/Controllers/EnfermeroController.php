@@ -75,9 +75,18 @@ class EnfermeroController extends Controller
     public function edit(Request $request)
     {
         $pacienteId = $request->input('paciente_id');
+        $inicio = $request->input('pivot_inicio');
+
         $enfermero = Auth::user()->enfermero;
-        // dd($enfermero);
+        // dd($request->input());
+        // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
+        
         $pacientes = $enfermero->pacientes->where('id',$pacienteId);
+        $pacientes = $pacientes->filter(function ($paciente) use ($inicio) {
+            return $paciente->pivot->inicio == $inicio;
+        });
+        
+
         // dd($pacientes);
         $id = $enfermero->id;        
         if(Auth::user()->tipo_usuario_id == 3){

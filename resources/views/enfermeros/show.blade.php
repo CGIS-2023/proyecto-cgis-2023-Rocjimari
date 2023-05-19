@@ -52,6 +52,22 @@
 
             </div>
             </div>
+            <br>
+        <div class="flex items-center justify-end mt-4">
+            <button type="button" class="bg-red-800 hover:bg-red-700">
+                <a href={{route('enfermeros.index')}}>
+                {{ __('Volver al listado') }}
+                </a>
+            </button>
+        
+        <form action={{route('enfermeros.edit', $enfermero->id)}} method="GET">
+            @csrf
+             <input type="hidden" name="paciente_id" value="{{ $paciente->pivot->paciente_id }}">
+             <input type="hidden" name="pivot_inicio" value="{{ $paciente->pivot->inicio }}">
+            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Editar</button>
+        </form>
+        </div>
+        
         </div>
         </tbody>     
         </div>
@@ -76,24 +92,11 @@
 
                 </div>
                 </div>
+            
         </div>
         @endif
 
        
-        <br>
-        <div class="flex items-center justify-end mt-4">
-            <button type="button" class="bg-red-800 hover:bg-red-700">
-                <a href={{route('enfermeros.index')}}>
-                {{ __('Volver al listado') }}
-                </a>
-            </button>
-        
-        <form action={{route('enfermeros.edit', $enfermero->id)}} method="GET">
-            @csrf
-            <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
-            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Editar</button>
-        </form>
-        </div>
         
     
 
