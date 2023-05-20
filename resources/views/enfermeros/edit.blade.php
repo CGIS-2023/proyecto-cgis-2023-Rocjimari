@@ -5,19 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    @foreach($pacientes as $paciente)
+    @once(!@include('layouts.navigationsecondary')== true)
+        @include('layouts.navigationsecondary')
+    @endonce
+    @endforeach    
 </head>
+
+
 <body> 
 
 @if (Auth::user()->tipo_usuario_id == 3)
 @foreach($pacientes as $paciente)
-@once(!@include('layouts.navigationsecondary')== true)
-    @include('layouts.navigationsecondary')
-@endonce
+
 
 <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
     <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
-    Editar Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
+    Consultas Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
     </div>
 
                 
@@ -53,37 +57,30 @@
                                 <option value="En tratamiento" {{($paciente->pivot->estado == 'En tratamiento')? 'selected' : ''}}>En tratamiento</option>
                             </select>
                         </div>
-                <div class="mt-4">
+                <div>
                     <x-label for="notas">Notas</x-label>
-                    <input class="block mt-1 w-full" type="text"   name="nombre"  value="{{$paciente->pivot->notas}}"required autofocus />
+                    <input class="block mt-1 w-full" type="text"   name="notas"  value="{{$paciente->pivot->notas}}" />
                 </div>
-                <div class="flex items-center justify-end mt-4">
-                            <x-button type="button" class="bg-red-800 hover:bg-red-700">
-                                <a href={{route('pacientes.index')}}>
-                                    {{ __('Cancelar') }}
-                                </a>
-                            </x-button>
-                            <x-button class="ml-4">
-                                <a href={{route('pacientes.index')}}>
-                                    {{ __('Guardar') }}
-                                </a>
-                            </x-button>
                 
 
-            </div>
-            </div>
+                <div class="flex items-center justify-end mt-4">
                 <form action="/enfermeros/{{$id}}" method="GET">
-                            @csrf
-                            <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
-                            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Guardar cambios</button>
+                    @csrf
+                    <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                    <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">Guardar cambios</button>
                 </form>
-            </form>
-</div>
+                <form action="{{route('pacientes.index')}}" method="GET">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm"style="margin-left: 10px">Cancelar</button>
+                </form>
+                </div>   
                 
-        </div>
-        </tbody>     
-        </div>
-        <div class="py-12">
+            </div>
+            </div>
+            </form>    
+            
+</div>
+         <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="font-semibold text-lg px-6 py-4 bg-white border-b border-gray-200">
@@ -91,7 +88,7 @@
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Validation Errors -->
-                    <form method="POST" action="{{ route('enfermeros.attachPaciente', [$enfermero->id]) }}">
+                    <form method="POST" action="{{ route('enfermeros.attachPaciente', $enfermero->id) }}">
                         @csrf
 
                         <div class="mt-4">
@@ -144,20 +141,22 @@
                         <div>
                             <x-label for="notas" :value="__('Notas')" />
 
-                            <x-input id="notas" class="block mt-1 w-full" type="text" name="comentarios" :value="old('name')" />
+                            <x-input id="notas" class="block mt-1 w-full" type="text" name="notas" :value="old('notas')" />
                         </div>
-
+                        
                         <div class="flex items-center justify-end mt-4">
-                            <x-button type="button" class="bg-red-800 hover:bg-red-700">
-                                <a href={{route('enfermeros.index')}}>
-                                    {{ __('Cancelar') }}
-                                </a>
-                            </x-button>
-                            <x-button class="ml-4">
-                                {{ __('Guardar') }}
-                            </x-button>
-                        </div>
+                        <form action="{{route('enfermeros.show', $id)}}" method="GET">
+                            @csrf
+                            <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                            <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">Guardar cambios</button>
+                        </form>
+                        <form action="{{route('pacientes.index')}}" method="GET">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm"style="margin-left: 10px">Cancelar</button>
+                        </form>
                     </form>
+                    
+                        </div>   
                 </div>
             </div>
         </div>

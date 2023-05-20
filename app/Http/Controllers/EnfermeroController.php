@@ -6,6 +6,7 @@ use App\Models\Paciente;
 use App\Models\Enfermero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EnfermeroController;
 
 class EnfermeroController extends Controller
 {
@@ -24,20 +25,12 @@ class EnfermeroController extends Controller
             // dd(enfermeros)
             $id = Auth::user()->enfermero->id;
             // dd($id);
+            
   
         }
         return view('enfermeros.index',['enfermeros' => $enfermeros, 'id' => $id]);
     }
 
-    // public function index(){
-        
-    //     $enfermeros = Enfermero::all();
-    //     return view('enfermeros.index',['enfermeros' => $enfermeros]);
-    // }
-
-    public function create(){
-        return view('enfermeros.create');
-    }
 
     public function show(Request $request,Enfermero $enfermero){
 
@@ -46,7 +39,9 @@ class EnfermeroController extends Controller
         
         $id = Auth::user()->enfermero->id;
         $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
-        // dd($pacientes);
+        // dd($request);
+       
+        
         return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
 
     }
@@ -64,10 +59,13 @@ class EnfermeroController extends Controller
     public function store(Request $request)
     {
        
-        $cita = new Enfermero($request->all());
-        $cita->save();
-        session()->flash('success', 'Consulta creada correctamente. Si nos da tiempo haremos este mensaje internacionalizable y parametrizable');
+        $enfermero = new Enfermero($request->all());
+        $enfermero->save();
+        session()->flash('success', 'Consulta creada correctamente');
         return redirect()->route('enfermeros.index');
+        // dd($pacientes);
+        
+
     }
 
     
@@ -82,61 +80,22 @@ class EnfermeroController extends Controller
         // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
         
         $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->get();
+        // dd($pacientes);
         // $pacientes = $pacientes->filter(function ($paciente) use ($inicio) {
         //     return $paciente->pivot->inicio == $inicio;
         // });
         
 
-        // dd($pacientes);
         $id = $enfermero->id;        
         if(Auth::user()->tipo_usuario_id == 3){
             return view('enfermeros/edit', ['enfermero' => $enfermero,  'pacientes' => $pacientes,'id' => $id]);
         }
         return view('enfermeros/edit', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id' => $id]);
+        
     }
     
        
 
-    // public function edit(Enfermero $enfermero){
-        
-    //     $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
-    //     // dd($pacientes);
-    //     $id = Auth::user()->enfermero->id;
-        
-    //     if(Auth::user()->tipo_usuario_id == 3){
-    //         return view('enfermeros.edit', ['enfermero' => $enfermero, 'pacientes' => $pacientes, 'id' => $id]);
-    //     }
-
-    //     return view('enfermeros.edit', ['enfermero' => $enfermero, 'id' => $id]);
-    // }
-
-    // public function update(Request $request,$id){//variable $request contiene campos modificados
-    //     $enfermero = Enfermero::find($id);
-    //     $enfermero->fill($request->all());// los actualiza
-    //     $enfermero->save();//se guarda
-    //     $enfermero->pacientes()->sync($request->pacientes);
-    //     return redirect()->action([EnfermeroController::class, 'index']);
-    //     // una vez guardado vuelve vista listado Pacientes
-    //  }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $enfermero = Enfermero::find($id);
-    //     $enfermero->fill($request->all());
-    //     $enfermero->save();
-
-    //     // Actualizar la tabla intermedia
-    //     $pacienteId = $request->input('paciente_id');
-    //     $pivotData = [
-    //         'inicio' => $request->input('inicio'),
-    //         'fin' => $request->input('fin'),
-    //         'estado' => $request->input('estado'),
-    //         'notas' => $request->input('notas'),
-    //     ];
-    //     $enfermero->pacientes()->updateExistingPivot($pacienteId, $pivotData);
-
-    //     return redirect()->action([EnfermeroController::class, 'index']);
-    // }
     public function update(Request $request, Enfermero $enfermero)
     {
         // dd($request->all());
@@ -147,7 +106,7 @@ class EnfermeroController extends Controller
         $fin = $request->input('fin');
         $notas = $request->input('notas');
         $estado = $request->input('estado');
-        
+        $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
         $enfermero->pacientes()->sync([$pacienteId => [
             'inicio' => $inicio,
             'fin' => $fin,
@@ -155,34 +114,39 @@ class EnfermeroController extends Controller
             'estado' => $estado
         ]]);
         
-    // Opcionalmente, puedes redirigir o hacer otras acciones después de guardar los cambios
+    session()->flash('success', 'Los cambios han sido guardados exitosamente.');
+    return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermero]);
     
-    return redirect()->back()->with('success', 'Los cambios han sido guardados exitosamente.');
+
 }
     
     public function destroy($id){
         $enfermero = Enfermero::find($id);
         $enfermero->delete();
         return redirect()->action([EnfermeroController::class, 'index']);
-
+        
 
     }
     public function attach_paciente(Request $request, Enfermero $enfermero)
     {
+        // dd($request->all());
+        // $this->validateWithBag('attach',$request, [
+        //     'paciente_id' => 'required|exists:pacientes,id',
+        //     'inicio' => 'required|date_format:Y-m-d\TH:i:s',
+        //     'fin' => 'required|date_format:Y-m-d\TH:i:s|after:inicio',
+        //     'notas' => 'nullable|string',
+        //     'estado' => 'required|string',
+        // ]);
         
-        $this->validateWithBag('attach',$request, [
-            'paciente_id' => 'required|exists:pacientes,id',
-            'inicio' => 'required|datetime',
-            'fin' => 'required|datetime|after:inicio',
-            'notas' => 'string',
-            'estado' => 'required|string',
+        $enfermero->pacientes()->attach($request->input('paciente_id'), [
+            'inicio' => $request->input('inicio'),
+            'fin' => $request->input('fin'),
+            'notas' => $request->input('notas'),
+            'estado' => $request->input('estado')
         ]);
-        $enfermero->pacientes()->attach($request->paciente_id, [
-            'inicio' => $request->inicio,
-            'fin' => $request->fin,
-            'notas' => $request->notas,
-            'estado' => $request->estado
-        ]);
+        // dd($enfermero);
+        
+        session()->flash('success', 'La relación se ha agregado correctamente.');
         return redirect()->route('enfermeros.edit', $enfermero->id);
     }
 
