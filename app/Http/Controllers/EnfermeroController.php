@@ -36,7 +36,7 @@ class EnfermeroController extends Controller
 
         
         $pacienteId = $request->input('paciente_id');
-        
+        // dd($pacienteId);
         $id = Auth::user()->enfermero->id;
         $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
         // dd($request);
@@ -138,6 +138,10 @@ class EnfermeroController extends Controller
         //     'estado' => 'required|string',
         // ]);
         
+        $pacienteId = $request->input('paciente_id');
+        // dd($pacienteId);
+        $id = Auth::user()->enfermero->id;
+        $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
         $enfermero->pacientes()->attach($request->input('paciente_id'), [
             'inicio' => $request->input('inicio'),
             'fin' => $request->input('fin'),
@@ -147,7 +151,7 @@ class EnfermeroController extends Controller
         // dd($enfermero);
         
         session()->flash('success', 'La relación se ha agregado correctamente.');
-        return redirect()->route('enfermeros.edit', $enfermero->id);
+        return view('enfermeros.show',['pacientes' => $pacientes,'enfermero' => $enfermero, 'id' => $id]);
     }
 
     public function detach_paciente(Enfermero $enfermero, Paciente $paciente)
