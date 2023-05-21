@@ -25,7 +25,67 @@
 
 @if (Auth::user()->tipo_usuario_id == 3)
 
-  <div class="py-12">
+  
+    
+@foreach($pacientes as $paciente)
+
+
+<div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
+    <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
+    Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
+    </div>
+
+                
+                <tr>
+         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                
+                
+                <div class="mt-4">
+                    <x-label for="inicio">Inicio</x-label>
+                    <input disabled type="datetime-local" name="inicio" value = "{{$paciente->pivot->inicio->format('Y-m-d\TH:i:s')}}" >
+                </div>
+                <div class="mt-4">
+                    <x-label for="fin">Fin</x-label>
+                    <input disabled type="datetime-local" name="fin" value = "{{$paciente->pivot->fin->format('Y-m-d\TH:i:s')}}" >
+                </div>
+                <div class="mt-4">
+                    <x-label for="estado">Estado</x-label>
+                    <input class="block mt-1 w-full" type="text"   readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->estado}}"required autofocus />
+                </div>
+                <div class="mt-4">
+                    <x-label for="notas">Notas</x-label>
+                    <input class="block mt-1 w-full" type="text"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->notas}}"required autofocus />
+                </div>
+                
+
+            </div>
+            </div>
+            <br>
+        <div class="flex items-center justify-end mt-4">
+                
+        
+        <form action="/pacientes" method="GET">
+            @csrf
+             
+            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Volver al listado</button>
+        </form>
+        <form action={{route('enfermeros.edit', $enfermero->id)}} method="GET">
+            @csrf
+             <input type="hidden" name="paciente_id" value="{{ $paciente->pivot->paciente_id }}">
+             <input type="hidden" name="pivot_inicio" value="{{ $paciente->pivot->inicio }}">
+            <button type="submit" class="btn btn-success btn-sm"style="margin-left: 10px">Editar</button>
+        </form>
+        
+        
+        </div>
+        </div>   
+        </div>
+   
+   
+        @endforeach
+               <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="font-semibold text-lg px-6 py-4 bg-white border-b border-gray-200">
@@ -94,8 +154,9 @@
                             <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">Guardar cambios</button>
                         </form>
                         <form action="{{route('pacientes.index')}}" method="GET">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm"style="margin-left: 10px">Cancelar</button>
+                            @csrf
+                            <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                            <button type="submit" class="btn btn-danger btn-sm"style="margin-left: 10px">Cancelar</button>
                         </form>
                     </form>
                     
@@ -103,64 +164,7 @@
                 </div>
             </div>
         </div>
-    </div>     
-@foreach($pacientes as $paciente)
-
-
-<div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
-    <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
-    Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
-    </div>
-
-                
-                <tr>
-         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                
-                
-                <div class="mt-4">
-                    <x-label for="inicio">Inicio</x-label>
-                    <input disabled type="datetime-local" name="inicio" value = "{{$paciente->pivot->inicio->format('Y-m-d\TH:i:s')}}" >
-                </div>
-                <div class="mt-4">
-                    <x-label for="fin">Fin</x-label>
-                    <input disabled type="datetime-local" name="fin" value = "{{$paciente->pivot->fin->format('Y-m-d\TH:i:s')}}" >
-                </div>
-                <div class="mt-4">
-                    <x-label for="estado">Estado</x-label>
-                    <input class="block mt-1 w-full" type="text"   readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->estado}}"required autofocus />
-                </div>
-                <div class="mt-4">
-                    <x-label for="notas">Notas</x-label>
-                    <input class="block mt-1 w-full" type="text"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->notas}}"required autofocus />
-                </div>
-                
-
-            </div>
-            </div>
-            <br>
-        <div class="flex items-center justify-end mt-4">
-                
-        
-        <form action="/pacientes" method="GET">
-            @csrf
-             
-            <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Volver al listado</button>
-        </form>
-        <form action={{route('enfermeros.edit', $enfermero->id)}} method="GET">
-            @csrf
-             <input type="hidden" name="paciente_id" value="{{ $paciente->pivot->paciente_id }}">
-             <input type="hidden" name="pivot_inicio" value="{{ $paciente->pivot->inicio }}">
-            <button type="submit" class="btn btn-success btn-sm"style="margin-left: 10px">Editar</button>
-        </form>
-        </div>
-        </div>   
-        </div>
-        
-   
-        @endforeach
-        
+    </div>   
                 
         @endif
 

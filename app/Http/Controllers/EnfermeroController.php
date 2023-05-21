@@ -71,12 +71,7 @@ class EnfermeroController extends Controller
         // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
         
         $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->get();
-        // dd($pacientes);
-        // $pacientes = $pacientes->filter(function ($paciente) use ($inicio) {
-        //     return $paciente->pivot->inicio == $inicio;
-        // });
-        
-
+        // dd($enfermero->pacientes()->wherePivot('inicio', $inicio)->get());
         $id = $enfermero->id;        
         if(Auth::user()->tipo_usuario_id == 3){
             return view('enfermeros/edit', ['enfermero' => $enfermero,  'pacientes' => $pacientes,'id' => $id]);
@@ -85,18 +80,7 @@ class EnfermeroController extends Controller
         
     }
     
-//     public function update(Request $request, $id)
-// {
-//     // Obtener los datos del formulario
-//     $datos = $request->all();
 
-//     // Actualizar la tabla intermedia
-//     $modeloPrincipal = ModeloPrincipal::find($id);
-//     $modeloPrincipal->relacion()->updateExistingPivot($modeloRelacionadoId, $datos);
-
-//     // Redireccionar o devolver una respuesta
-//     return redirect()->back()->with('success', 'Tabla intermedia actualizada correctamente.');
-// }
      
     public function update(Request $request, Enfermero $enfermero)
     {
@@ -106,10 +90,12 @@ class EnfermeroController extends Controller
         $enfermero_id = Auth::user()->enfermero->id;
         $datos = $request->all();
         // dd($datos);
-        $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
+        $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
         
         $enfermero = Enfermero::find($enfermero_id);
         $enfermero->pacientes()->updateExistingPivot($pacienteId, $datos);
+       
+        
         
     session()->flash('success', 'Los cambios han sido guardados exitosamente.');
     return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermero]);
@@ -150,10 +136,18 @@ class EnfermeroController extends Controller
         return view('enfermeros.show',['pacientes' => $pacientes,'enfermero' => $enfermero, 'id' => $id]);
     }
 
-    public function detach_paciente(Enfermero $enfermero, Paciente $paciente)
+        public function detach_paciente(Enfermero $enfermero, Paciente $paciente, Request $request)
     {
-        $enfermero->pacientes()->detach($paciente->id);
-        return redirect()->route('enfermero.edit', $enfermero->id);
+        $pacienteId = $paciente->id;
+        $inicio = $request->input('inicio');
+        $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->detach($pacienteId);
+
+        // dd($pacientes);
+
+        $id = Auth::user()->enfermero->id;
+        $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+        return view('enfermeros.show',['pacientes' => $pacientes,
+        'enfermero' => $enfermero, 'id' => $id, 'paciente' => $paciente]);
     }
 
         

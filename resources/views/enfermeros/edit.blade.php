@@ -61,19 +61,33 @@
                             <input class="block mt-1 w-full" type="text" name="notas" value="{{$paciente->pivot->notas}}" />
                         </div>
         
+                        
                         <div class="flex items-center justify-end mt-4">
                             <form action="{{route('pacientes.index')}}" method="GET">
                                 @csrf
                                 <button type="submit" class="btn btn-danger btn-sm" style="margin-left: 10px">Cancelar</button>
                             </form>
-                           <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                           <input type="hidden" name="inicio" value="{{ $paciente->pivot->inicio }}">
                             <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">
                                     Guardar cambios
-                                </button>
+                            </button>   
+                        
+                            
+                            
+                            <form method="POST" action="{{ route('enfermeros.detachPaciente', [$enfermero->id, $paciente->id]) }}">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="inicio" value="{{ $paciente->pivot->inicio  }}">
+                                <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+
+                                
+                                <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">Eliminar consulta</button>
+                            </form>
                             
                         </div> 
                     </form> 
                 </div>
+                
             </div>
         </div>
     
