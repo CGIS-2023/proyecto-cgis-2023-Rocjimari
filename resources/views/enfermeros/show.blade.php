@@ -31,7 +31,15 @@
 
 
 <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
-    <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
+    <div  style="position: absolute; top: 26px; right: 50px;">
+    <form action="{{route('enfermeros.show', $id)}}" method="GET">
+                    @csrf
+                    <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                    <button type="submit" class="btn btn-warning btn-sm" style="margin-left: 10px">Recargar consultas</button>
+                </form>
+    </div>
+            
+    <div style="position: absolute; top: 26px; right: 200px;  left: 50px;  line-height: 32px;  padding-left: 175px;  padding-right: 175px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
     Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
     </div>
 
