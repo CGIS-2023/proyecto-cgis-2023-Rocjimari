@@ -304,16 +304,12 @@ body {
     margin-left: 30px;
 }
 
-.leftBox {   
+.leftBox {
     padding: 0px;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: flex-start;
     overflow: hidden;
-    flex: 1;
+    flex : 1;
+    width: 100%;
 }
-
 .rightBox img {
     object-fit: cover;
     width: 150%;
@@ -444,7 +440,7 @@ h3 {
                         <div class="patientsBox">
                             <div class="patient box">                             
                                 <div class="patientImage">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/13/13732.png?w=740&t=st=1684363456~exp=1684364056~hmac=11b97908ad018048e032383309b71eff93873c0a309d52146e50685482bec13a" alt="">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/387/387585.png" alt="">
                                 </div>
                                 <div class="name"> <h4>Número pacientes</h4></div>
                                 <div class="status"><p>Conteo de todos los pacientes asignados</p></div>                          
@@ -452,11 +448,20 @@ h3 {
                             </div>
                             <div class="patient box">                             
                                 <div class="patientImage">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/47/47883.png?w=740&t=st=1684363555~exp=1684364155~hmac=62bd9df9d05580091c65014607f76492279490f22159ba8c0f5722646ae30ed4" alt="">
+                                    <img src="https://img.freepik.com/vector-premium/historial-medico-icono-servicios-linea_116137-3643.jpg" alt="">
                                 </div>
                                 <div class="name"> <h4>Número de consultas</h4></div>
                                 <div class="status"><p>Conteo de todos las consultas realizadas</p></div> 
 								<div class="numbers">{{$consultas}}</div>
+
+                            </div>
+                            <div class="patient box">                             
+                                <div class="patientImage">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/568/568038.png?w=740&t=st=1684707274~exp=1684707874~hmac=eccb4e6494b5db34b0462db3b9f943a7ffa51ff7280fa60621a0c561e76eca24" alt="">
+                                </div>
+                                <div class="name"> <h4>Notificaciones nuevas</h4></div>
+                                <div class="status"><p></p></div> 
+								<div class="numbers">{{0}}</div>
 
                             </div>
                           
@@ -470,7 +475,7 @@ h3 {
         <div class="rightSection">
             <div class="upRow row">
                 <div class="leftBox box">
-                    <h3>May, 2020</h3>
+                    <h3>May, 2023</h3>
                     <div class="calendar">
                         <div class="date">1</div>
                         <div class="date">2</div>
@@ -487,33 +492,14 @@ h3 {
                         <div class="date">13</div>
                         <div class="date">14</div>
                         <div class="date">15</div>
-                        <div class="date">16</div>
-                        <div class="date">17</div>
-                        <div class="date">18</div>
-                        <div class="date">19</div>
-                        <div class="date">20</div>
-                        <div class="date">21</div>
-                        <div class="date">22</div>
-                        <div class="date">23</div>
-                        <div class="date">24</div>
-                        <div class="date">25</div>
-                        <div class="date">26</div>
-                        <div class="date">27</div>
-                        <div class="date">28</div>
-                        <div class="date">29</div>
-                        <div class="date">30</div>
-                        <div class="date">31</div>
+                        
                     </div>
                 </div>
                 <div class="rightBox box">
-                    <div class="boxText">
-                        <h3>Hello, {{}}</h3>                        
-                        <p>Don't forget to assign your task!</p>
-                        <div class="button blue"><p>Complete Report</p></div>
-                    </div>
+                    
                     <div class="boxImage">
                         <img src="https://i.pinimg.com/originals/61/c7/a2/61c7a28bbb12ee7d75064e9dba23305e.png" alt="">
-                    </div>
+                    
                 </div>
             </div>
             <div class="bottomRow row">

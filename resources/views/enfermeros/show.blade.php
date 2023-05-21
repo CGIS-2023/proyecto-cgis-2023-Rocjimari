@@ -31,11 +31,11 @@
 
 
 <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
-    <div  style="position: absolute; top: 26px; right: 50px;">
+    <div  style="position: absolute; top: 26px; right: 50px; ">
     <form action="{{route('enfermeros.show', $id)}}" method="GET">
                     @csrf
                     <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
-                    <button type="submit" class="btn btn-warning btn-sm" style="margin-left: 10px">Recargar consultas</button>
+                    <button type="submit" class="btn btn-warning btn-sm" style="margin-left: 10px; border: 2px solid #57d116;">Recargar consultas</button>
                 </form>
     </div>
             
