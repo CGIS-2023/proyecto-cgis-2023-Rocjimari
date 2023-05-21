@@ -19,7 +19,7 @@
                         <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.lista')">
                             {{ __('Mis Pacientes') }}
                         </x-nav-link>
-                        <x-nav-link href="/enfermeros/{{Auth::user()->enfermero->id}}"  :active="request()->routeIs('enfermeros.show')">
+                        <x-nav-link href="/enfermeros/{{Auth::user()->enfermero->id}}"  :active="request()->routeIs('enfermeros.show') or request()->routeIs('enfermeros.attachPaciente')">
                             {{ __('Mis Consultas') }}
                         </x-nav-link>
                     @endif

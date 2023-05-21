@@ -150,7 +150,6 @@ class EnfermeroController extends Controller
         ]);
         // dd($enfermero);
         
-        session()->flash('success', 'La relación se ha agregado correctamente.');
         return view('enfermeros.show',['pacientes' => $pacientes,'enfermero' => $enfermero, 'id' => $id]);
     }
 
