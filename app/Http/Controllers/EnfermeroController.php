@@ -47,15 +47,6 @@ class EnfermeroController extends Controller
     }
    
        
-
-   
-    
-
-    // public function store(Request $request){
-    //         Enfermero::create($request->all());  
-    //         return redirect()->action([EnfermeroController::class, 'index']);
-            
-    //     }
     public function store(Request $request)
     {
        
@@ -94,25 +85,31 @@ class EnfermeroController extends Controller
         
     }
     
-       
+//     public function update(Request $request, $id)
+// {
+//     // Obtener los datos del formulario
+//     $datos = $request->all();
 
+//     // Actualizar la tabla intermedia
+//     $modeloPrincipal = ModeloPrincipal::find($id);
+//     $modeloPrincipal->relacion()->updateExistingPivot($modeloRelacionadoId, $datos);
+
+//     // Redireccionar o devolver una respuesta
+//     return redirect()->back()->with('success', 'Tabla intermedia actualizada correctamente.');
+// }
+     
     public function update(Request $request, Enfermero $enfermero)
     {
         // dd($request->all());
         $pacienteId = $request->input('paciente_id');
-        // dd($request);
+        // dd($request->input('paciente_id'));
         $enfermero_id = Auth::user()->enfermero->id;
-        $inicio = $request->input('inicio');
-        $fin = $request->input('fin');
-        $notas = $request->input('notas');
-        $estado = $request->input('estado');
+        $datos = $request->all();
+        // dd($datos);
         $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
-        $enfermero->pacientes()->sync([$pacienteId => [
-            'inicio' => $inicio,
-            'fin' => $fin,
-            'notas' => $notas,
-            'estado' => $estado
-        ]]);
+        
+        $enfermero = Enfermero::find($enfermero_id);
+        $enfermero->pacientes()->updateExistingPivot($pacienteId, $datos);
         
     session()->flash('success', 'Los cambios han sido guardados exitosamente.');
     return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermero]);
