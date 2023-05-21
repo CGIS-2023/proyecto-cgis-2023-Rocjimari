@@ -497,10 +497,6 @@ h3 {
                 </div>
                 <div class="rightBox box">
                     
-                    <div class="boxImage">
-                        <img src="https://i.pinimg.com/originals/61/c7/a2/61c7a28bbb12ee7d75064e9dba23305e.png" alt="">
-                    
-                </div>
             </div>
             <div class="bottomRow row">
                 
