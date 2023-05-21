@@ -54,6 +54,7 @@
                                 <option value="Recuperado" {{($paciente->pivot->estado == 'Recuperado')? 'selected' : ''}}>Recuperado</option>
                                 <option value="En tratamiento" {{($paciente->pivot->estado == 'En tratamiento')? 'selected' : ''}}>En tratamiento</option>
                             </select>
+                            
                         </div>
                         <div>
                             <x-label for="notas">Notas</x-label>

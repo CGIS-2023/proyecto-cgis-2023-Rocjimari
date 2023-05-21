@@ -109,7 +109,6 @@ class EnfermeroController extends Controller
         $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
         
         $enfermero = Enfermero::find($enfermero_id);
-        
         $enfermero->pacientes()->updateExistingPivot($pacienteId, $datos);
         
     session()->flash('success', 'Los cambios han sido guardados exitosamente.');
