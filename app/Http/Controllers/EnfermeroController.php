@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medico;
 use App\Models\Paciente;
 use App\Models\Enfermero;
 use Illuminate\Http\Request;
@@ -12,10 +13,10 @@ class EnfermeroController extends Controller
 {
     
 
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Enfermero::class, 'enfermero');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Enfermero::class, 'enfermero');
+    }
 
     public function index(Request $request){
         
@@ -77,14 +78,30 @@ class EnfermeroController extends Controller
        
     public function store(Request $request)
     {
-       
+        // dd($request->input());
+        if (Auth::user()->tipo_usuario_id == 2){
+            
+        // dd($request->input());
+            $enfermero = new Enfermero($request->all());
+            $enfermero->save();
+            return redirect()->route('enfermeros.index');
+            // dd($pacientes);
+            }
+        if (Auth::user()->tipo_usuario_id == 3){
         $enfermero = new Enfermero($request->all());
         $enfermero->save();
         session()->flash('success', 'Consulta creada correctamente');
         return redirect()->route('enfermeros.index');
         // dd($pacientes);
-        
+        }
 
+    }
+    
+    public function create(){
+        $enfermeros = Auth::user()->enfemero;
+        // dd(Enfermero::all());
+        $medico = Medico::all();
+        return view('enfermeros.create',[ 'medico' => $medico, 'enfermeros'=> $enfermeros]);
     }
 
     

@@ -12,6 +12,8 @@
 
     <form action="/enfermeros" method="POST" role="form">
         {{ csrf_field()}}
+        <input type="hidden" name="user_id" value="6">
+
         <div class="py-12">
             <label required for="name">Nombre</label>
             <input type="text" class="form-control"  name="nombre" id="Escribe nombre enfermero" placeholder="Escribe nombre médico">
