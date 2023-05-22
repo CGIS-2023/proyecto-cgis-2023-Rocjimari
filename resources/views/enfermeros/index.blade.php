@@ -126,7 +126,7 @@
     
     <div class="card-footer text-muted">
         <br>
-        <a href="/enfermeros/create">Nuevo enfermero</a>
+        <a href="/pacientes/create">Nuevo enfermero</a>
         <br>
         <a href="/">Inicio</a>
     </div>

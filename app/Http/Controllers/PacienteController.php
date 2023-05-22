@@ -96,12 +96,18 @@ class PacienteController extends Controller
     //     return view('pacientes/create', ['pacientes' => $pacientes, 'enfermeros' => $enfermeros]);
     // }
 
-    public function create(){
-        
-        $medico = Auth::user()->medico;
-        // dd(Enfermero::all());
-        $enfermeros = Enfermero::all();
-        return view('pacientes.create',[ 'medico' => $medico, 'enfermeros'=> $enfermeros]);
+    
+        public function create(){
+            if (Auth::user()->tipo_usuario_id == 3){
+                $enfermero = Auth::user()->enfermero;
+                $medicos = Medico::all();
+                return view('pacientes.create',[  'medicos' => $medicos, 'enfermero'=> $enfermero]);
+            }
+            if (Auth::user()->tipo_usuario_id == 2){
+                $medicos = Auth::user()->medicos;
+                $enfermeros = Enfermero::all();
+                return view('pacientes.create',[ 'medicos' => $medicos, 'enfermeros'=> $enfermeros]);
+            }
     }
 
 

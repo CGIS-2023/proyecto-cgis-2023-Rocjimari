@@ -103,6 +103,7 @@ class EnfermeroController extends Controller
         $medico = Medico::all();
         return view('enfermeros.create',[ 'medico' => $medico, 'enfermeros'=> $enfermeros]);
     }
+    
 
     
     
