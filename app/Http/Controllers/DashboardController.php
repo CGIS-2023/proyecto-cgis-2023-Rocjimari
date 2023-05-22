@@ -14,6 +14,12 @@ class DashboardController extends Controller
             $consultas = Auth::user()->enfermero->pacientes->count();
             
     }
+    if (Auth::user()->tipo_usuario_id == 2){
+        $pacientes = Auth::user()->medico->pacientes()->paginate()->unique();
+        $countp = $pacientes->count();
+        $consultas = Auth::user()->medico->pacientes->count();
+        
+}
     return view('dashboard.dashboard',['countp' => $countp, 'consultas' =>$consultas]);
 
     }   
