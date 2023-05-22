@@ -104,9 +104,9 @@ class PacienteController extends Controller
                 return view('pacientes.create',[  'medicos' => $medicos, 'enfermero'=> $enfermero]);
             }
             if (Auth::user()->tipo_usuario_id == 2){
-                $medicos = Auth::user()->medicos;
+                $medico = Auth::user()->medico;
                 $enfermeros = Enfermero::all();
-                return view('pacientes.create',[ 'medicos' => $medicos, 'enfermeros'=> $enfermeros]);
+                return view('pacientes.create',[ 'medico' => $medico, 'enfermeros'=> $enfermeros]);
             }
     }
 
