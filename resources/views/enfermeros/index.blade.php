@@ -115,24 +115,6 @@
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>
                         
                     </form>
-                    <form action="/enfermeros/{{$enfermeros->id}}/edit">
-                        @csrf
-                        @method('edit')
-                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Editar</button>
-                    </form>
-
-                    </form>
-                    <form action="/enfermeros/{{$enfermeros->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
-                        @csrf
-                        @method('delete')
-                        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                            <script>
-                                 $(".specialButton").click(function(){
-                                    return confirm("Do you want to delete this ?");
-                                });
-                            </script>
-                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Eliminar</button>
-                    </form>
                 </td>
             </tr>
             @endisset

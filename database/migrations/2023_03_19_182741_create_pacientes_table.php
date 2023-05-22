@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('sexo');
             $table->integer('edad');
             $table->string('estado');
-            $table->date('fecha_entrada');
-            $table->date('fecha_salida');            
+            $table->datetime('fecha_entrada');
+            $table->datetime('fecha_salida');            
             $table->string('estado_inicial');
             $table->foreignId('enfermero_id')->nullable();
             $table->foreignId('medico_id')->nullable();

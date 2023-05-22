@@ -32,6 +32,7 @@ class PacienteController extends Controller
         elseif(Auth::user()->tipo_usuario_id == 2){
             $id = Auth::user()->medico->id;
             $pacientes = Auth::user()->medico->pacientes()->paginate()->unique();   
+            // dd($pacientes);
             
 
         }
@@ -104,47 +105,17 @@ class PacienteController extends Controller
     }
 
 
-    // public function store(Request $request){//request contiene datos de formulario
-    //     $paciente = new Paciente($request->all());// se carga datos en $paciente
-    //     $paciente->save();//lo guardamos
-    //     return redirect()->action([AlumnoController::class, 'index']);
-    //     // una vez guardado vuelve vista listado Pacientes
-    // }
-
-    // public function store(Request $request){//request contiene datos de formulario
-    //         // $paciente = new Paciente;
-    //         // $paciente->nombre = $request->input('nombre');
-    //         // $paciente->sexo = $request->input('sexo');
-    //         // $paciente->edad = $request->input('edad');
-    //         // $paciente->estado = $request->input('estado');
-    //         // $paciente->save();   
-    //         // dd($request->all());
-    //         $paciente = Paciente::create($request->all());  
-    //         $paciente->save();
-    //         // dd($paciente);
-    //         return redirect()->action([PacienteController::class, 'index']);
-            
-    //     }
-    // public function store(Request $request)
-    // {
-       
-    //     $paciente = new Paciente($request->all());
-    //     $paciente->save();
-    //     dd($paciente->save());
-    //     session()->flash('success', 'Consulta creada correctamente');
-    //     return redirect()->route('pacientes.index');
-    //     // dd($pacientes);
+      
+    public function store(Request $request)
+    {
+    
+        // dd($request->all());
+        Paciente::create($request->all());
+        // dd($paciente);
         
 
-    // }
-    public function store(Request $request)
-{
-   
-    // dd($request->all());
-    Paciente::create($request->all());
-
-    return redirect()->route('pacientes.index')->with('success', 'Paciente creado exitosamente.');
-}
+        return redirect()->route('pacientes.index')->with('success', 'Paciente creado exitosamente.');
+    }
 
    
     

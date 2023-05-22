@@ -23,7 +23,9 @@
 @endforeach
 @endif
 @if (Auth::user()->tipo_usuario_id == 2)
+@isset($paciente)
 @include('layouts.navigationsecondary')
+@endisset
 @endif
 
 

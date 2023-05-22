@@ -91,17 +91,29 @@ class EnfermeroController extends Controller
     
     public function edit(Request $request)
     {
-        $pacienteId = $request->input('paciente_id');
-        $inicio = $request->input('pivot_inicio');
-
-        $enfermero = Auth::user()->enfermero;
-        // dd($request->input());
-        // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
-        
-        $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->get();
-        // dd($enfermero->pacientes()->wherePivot('inicio', $inicio)->get());
-        $id = $enfermero->id;        
+        if(Auth::user()->tipo_usuario_id == 2){
+            // dd($request->all());
+            $pacienteId = $request->input('paciente_id');
+            
+            $id = $request->input('enfermero_id');
+            // dd($id);
+            $enfermero = Enfermero::find($id);
+            // dd($enfermero);
+            $pacientes = Paciente::find($pacienteId);
+            // dd($request->input()); 
+            return view('enfermeros/edit', ['enfermero' => $enfermero,  'pacientes' => $pacientes,'id' => $id]);
+        }
         if(Auth::user()->tipo_usuario_id == 3){
+            $pacienteId = $request->input('paciente_id');
+            $inicio = $request->input('pivot_inicio');
+
+            $enfermero = Auth::user()->enfermero;
+            // dd($request->input());
+            // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
+            
+            $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->get();
+            // dd($enfermero->pacientes()->wherePivot('inicio', $inicio)->get());
+            $id = $enfermero->id;        
             return view('enfermeros/edit', ['enfermero' => $enfermero,  'pacientes' => $pacientes,'id' => $id]);
         }
         return view('enfermeros/edit', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id' => $id]);
@@ -132,10 +144,18 @@ class EnfermeroController extends Controller
 }
     
     public function destroy($id){
+        if(Auth::user()->tipo_usuario_id == 3){
         $enfermero = Enfermero::find($id);
         $enfermero->delete();
         return redirect()->action([EnfermeroController::class, 'index']);
-        
+        }
+        if(Auth::user()->tipo_usuario_id == 3){
+            $enfermero = Enfermero::find($id);
+            $enfermero->delete();
+            return redirect()->action([EnfermeroController::class, 'index']);
+            }
+            
+
 
     }
     public function attach_paciente(Request $request, Enfermero $enfermero)
