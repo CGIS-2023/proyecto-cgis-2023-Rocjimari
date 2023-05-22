@@ -32,7 +32,7 @@ class PacienteController extends Controller
         elseif(Auth::user()->tipo_usuario_id == 2){
             $id = Auth::user()->medico->id;
             $pacientes = Auth::user()->medico->pacientes()->paginate()->unique();   
-            // dd($pacientes);
+            
 
         }
         elseif(Auth::user()->tipo_usuario_id == 1){
@@ -98,7 +98,9 @@ class PacienteController extends Controller
     public function create(){
         
         $medico = Auth::user()->medico;
-        return view('pacientes.create',[ 'medico' => $medico]);
+        // dd(Enfermero::all());
+        $enfermeros = Enfermero::all();
+        return view('pacientes.create',[ 'medico' => $medico, 'enfermeros'=> $enfermeros]);
     }
 
 

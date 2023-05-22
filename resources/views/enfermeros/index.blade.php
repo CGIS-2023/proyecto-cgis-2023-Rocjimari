@@ -42,6 +42,9 @@
     </style>
     </head>
     <body>
+    
+     @include('layouts.navigationsecondary')
+    
     <br>
     <div class="card">
         
@@ -80,6 +83,7 @@
             </tr>
             @endisset
             @endif
+            
             @if (Auth::user()->tipo_usuario_id == 2)
             <div class="card-header">
                 Listado Enfermeros
@@ -96,26 +100,29 @@
         
             </thead>
             <tbody>
-            @foreach($enfermeros as $enfermero)
+            @isset($enfermeros)
             <tr>
-                <td>{{ $enfermero->nombre }}</td>
-                <td>{{ $enfermero->apellidos }}</td>
+                <td>{{ $enfermeros->nombre }}</td>
+                <td>{{ $enfermeros->apellidos }}</td>
                 
                 <td>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <form action="/enfermeros/{{$enfermero->id}}">
+                    <form action="/enfermeros/{{$enfermeros->id}}">
                         @csrf
-                        @method('edit')
+                        @method('edit')                        
+                        <input type="hidden" name="paciente_id" value = "{{ $paciente->id }}" >                        
+                        <input type="hidden" name="enfermero_id" value = "{{ $paciente->enfermero_id }}" >
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>
                         
                     </form>
-                    <form action="/enfermeros/{{$enfermero->id}}/edit">
+                    <form action="/enfermeros/{{$enfermeros->id}}/edit">
                         @csrf
                         @method('edit')
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Editar</button>
                     </form>
+
                     </form>
-                    <form action="/enfermeros/{{$enfermero->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
+                    <form action="/enfermeros/{{$enfermeros->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
                         @csrf
                         @method('delete')
                         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -128,7 +135,7 @@
                     </form>
                 </td>
             </tr>
-            @endforeach
+            @endisset
             @endif
 
         </tbody>

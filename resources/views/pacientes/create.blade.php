@@ -33,6 +33,15 @@
                         </select>
                     </div>
                     <div class="mt-4">
+                    <x-label for="enfermero_id" :value="__('Enfermero')" />
+                        <select id="enfermero_id" name="enfermero_id" required> 
+                            <option value="" @if (old('enfermero_id') == '') selected @endif>Seleccionar Enfermero</option>                            
+                            @foreach ($enfermeros as $enfermero)
+                            <option value="{{$enfermero->id}}" >{{$enfermero->nombre}} </option>
+                            @endforeach
+                        </select>
+                    </div>   
+                    <div class="mt-4">
                         <x-label required for="name">Nombre</x-label>
                         <input type="text" class="form-control"  name="nombre" id="Escribe nombre paciente" placeholder="Escribe nombre paciente">
                     </div>

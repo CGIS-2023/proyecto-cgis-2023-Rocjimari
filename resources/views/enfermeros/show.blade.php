@@ -15,12 +15,16 @@
 </head>
 
 <body>
+@if (Auth::user()->tipo_usuario_id == 3)
 @foreach($pacientes as $paciente)    
 @once(!@include('layouts.navigationsecondary')== true)
     @include('layouts.navigationsecondary')
 @endonce
 @endforeach
-
+@endif
+@if (Auth::user()->tipo_usuario_id == 2)
+@include('layouts.navigationsecondary')
+@endif
 
 
 @if (Auth::user()->tipo_usuario_id == 3)
@@ -180,6 +184,17 @@
 
         
         @if (Auth::user()->tipo_usuario_id == 2)
+        <div style="  position: relative; margin: 32px 16px;; padding: 60px 20px 16px;  border:2px solid #dad4ff; ;  border-radius: 10px;  background: #ffffff">
+            <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #7f71d3;  border-radius: 5px;  background: #a59cd8a5;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
+            Enfermero:  {{ $enfermero->apellidos}} ,     {{$enfermero->nombre}} 
+            </div>
+
+
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        
+                        
                     <div class="py-12">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre" 
@@ -193,6 +208,9 @@
 
                 </div>
                 </div>
+                </div>
+            </div>
+        </div>
             
         </div>
         @endif

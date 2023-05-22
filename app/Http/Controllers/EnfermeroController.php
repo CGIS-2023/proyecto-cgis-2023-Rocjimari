@@ -17,7 +17,7 @@ class EnfermeroController extends Controller
     //     $this->authorizeResource(Enfermero::class, 'enfermero');
     // }
 
-    public function index(){
+    public function index(Request $request){
         
         if (Auth::user()->tipo_usuario_id == 3){
             $enfermeros = Auth::user()->enfermero; 
@@ -25,24 +25,52 @@ class EnfermeroController extends Controller
             // dd(enfermeros)
             $id = Auth::user()->enfermero->id;
             // dd($id);
-            
+            return view('enfermeros.index',['enfermeros' => $enfermeros, 'id' => $id]);
   
         }
+        if (Auth::user()->tipo_usuario_id == 2){
+            $pacienteid = $request->paciente;
+            $paciente = Paciente::find($pacienteid);
+            $enfermeroId = $paciente->enfermero_id;
+            // $enfermeros = Enfermero::all(); 
+            $enfermeros = Enfermero::find($enfermeroId); 
+            // dd($paciente->enfermero_id);
+            // dd($enfermeros);
+            
+            return view('enfermeros.index',['enfermeros' => $enfermeros, 'id' => $enfermeroId, 'paciente' => $paciente]);
+        }
+        
         return view('enfermeros.index',['enfermeros' => $enfermeros, 'id' => $id]);
     }
 
 
     public function show(Request $request,Enfermero $enfermero){
 
+        if (Auth::user()->tipo_usuario_id == 3){
+            $pacienteId = $request->input('paciente_id');
+            // dd($pacienteId);
+            $id = Auth::user()->enfermero->id;
+            $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+            // dd($request);
         
-        $pacienteId = $request->input('paciente_id');
-        // dd($pacienteId);
-        $id = Auth::user()->enfermero->id;
-        $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
-        // dd($request);
-       
+            
+            return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
+        }
+        if (Auth::user()->tipo_usuario_id == 2){
+            // dd($request->all());
+            $pacienteId = $request->input('paciente_id');
+            $paciente = Paciente::find($pacienteId);
+            $id = $request->input('enfermero_id');
+            
+            // dd($pacienteId);
+            // $id = Auth::user()->enfermero->id;
+            // $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+            // dd($request);
         
-        return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
+            
+            return view('enfermeros.show', ['enfermero' => $enfermero, 'paciente' => $paciente,'id'=> $id]);
+        }
+        
 
     }
    
