@@ -94,3 +94,6 @@ Route::post('/enfermeros/{enfermero}/attach-paciente', [EnfermeroController::cla
 Route::delete('/enfermeros/{enfermero}/detach-paciente/{paciente}', [EnfermeroController::class, 'detach_paciente'])
         ->name('enfermeros.detachPaciente');
 
+Route::get('/consulta', [EnfermeroController::class, 'consulta'])->name('enfermeros.consulta');
+
+

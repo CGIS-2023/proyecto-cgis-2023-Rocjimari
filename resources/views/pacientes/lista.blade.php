@@ -100,9 +100,9 @@
                                 });
                             </script>
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Eliminar</button>
-                    </form>  
                     
-                        @if (Auth::user()->tipo_usuario_id == 3)
+                    </form>  
+                    @if (Auth::user()->tipo_usuario_id == 3)
                         <form action="/enfermeros/{{$id}}" method="GET">
                             @csrf
                             <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
@@ -111,6 +111,7 @@
                         </form>
                           
                         @endif
+                        
                         
 
                     <br>
@@ -123,8 +124,12 @@
         <br>
         <a href="/pacientes/create">Nuevo paciente</a>
         <br>
+        <a href='/consulta' >Añadir consulta</a>
+        <br>
         <a href="/">Inicio</a>
+        
     </div>
+        
         </div>
     </div>
     

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellidos');            
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
+            $table->foreignId('paciente_id')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,17 @@
 
 
 </head>
+@if (count($pacientes) === 0)
+<div style="position: relative; margin: 32px 40px; padding: 60px 20px 16px; border: 2px solid #65e221; border-radius: 10px; background: #ffffff">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <p style="color: red; font-weight: bold;">No hay Consultas registradas para este paciente</p>
+        <a href="/pacientes" class="btn btn-info btn-sm" style="margin-left: 10px">Volver al listado</a>
+    </div>
+</div>
 
+
+@else
+   
 <body>
 @if (Auth::user()->tipo_usuario_id == 3)
 @foreach($pacientes as $paciente)    
@@ -91,6 +101,12 @@
              <input type="hidden" name="pivot_inicio" value="{{ $paciente->pivot->inicio }}">
             <button type="submit" class="btn btn-success btn-sm"style="margin-left: 10px">Editar</button>
         </form>
+         <form id="detach-form-{{$enfermero->id}}-{{$paciente->id}}" method="POST" action="{{ route('enfermeros.detachPaciente', [$enfermero->id, $paciente->id]) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-sm" style="margin-left: 10px">Eliminar Consulta</button>
+        </form>
+                    
         
         
         </div>
@@ -174,14 +190,16 @@
                             <button type="submit" class="btn btn-danger btn-sm"style="margin-left: 10px">Cancelar</button>
                         </form>
                     </form>
-                    
+
+                   
                         </div>   
                 </div>
             </div>
         </div>
     </div>   
               
-        @endforeach  
+        @endforeach 
+         
         @endif
 
 
@@ -219,10 +237,11 @@
         </div>
         @endif
 
+ 
+
        
         
-    
-
+@endif
 </body>
 </html>
 </x-app-layout>

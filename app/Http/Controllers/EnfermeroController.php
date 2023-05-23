@@ -49,11 +49,21 @@ class EnfermeroController extends Controller
 
         if (Auth::user()->tipo_usuario_id == 3){
             $pacienteId = $request->input('paciente_id');
+            // dd($request->input());
+
             // dd($pacienteId);
             $id = Auth::user()->enfermero->id;
-            $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+            $pacientes = $enfermero->pacientes->where('id',$pacienteId);
+            // dd($enfermero->pacientes);
+            // $pacientes = Paciente::wherePivot('', $id)->pluck('id')->unique();
+            // $pacientes = Paciente::where('enfermero_id', $id)->where('id',$pacienteId)->get();
+            // dd($pacientes);
+            
+
+            // $pacientes = Paciente::whereIn('id', $pacientes)->get();
+            // dd($pacientes);
             // $paciente = Paciente::find($pacienteId);
-            // dd($request->input('paciente')->id);
+            // dd(Auth::user()->enfermero->pacientes);
         
             
             return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
@@ -72,6 +82,41 @@ class EnfermeroController extends Controller
             
             return view('enfermeros.show', ['enfermero' => $enfermero, 'paciente' => $paciente,'id'=> $id]);
         }
+        
+
+    }
+    public function consulta(){
+
+        
+        if (Auth::user()->tipo_usuario_id == 3){
+            $enfermero_id = Auth::user()->enfermero->id; 
+            $enfermero = Auth::user()->enfermero;
+            $pacientes = Paciente::all();
+            $pacientes = $pacientes->where('enfermero_id',$enfermero_id);
+
+            // dd($pacientes);
+            // $pacienteId = $request->input('paciente_id');
+            // dd($request->input());
+
+            // dd($pacienteId);
+            $id = Auth::user()->enfermero->id;
+            // $pacientes = $enfermero->pacientes->where('id',$pacienteId);
+            // dd($enfermero->pacientes);
+            // $pacientes = Paciente::wherePivot('', $id)->pluck('id')->unique();
+            // $pacientes = Paciente::where('enfermero_id', $id)->where('id',$pacienteId)->get();
+            // dd($pacientes);
+            
+
+            // $pacientes = Paciente::whereIn('id', $pacientes)->get();
+            // dd($pacientes);
+            // $paciente = Paciente::find($pacienteId);
+            // dd(Auth::user()->enfermero->pacientes);
+        
+            return view('enfermeros.consulta', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
+            
+            // return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
+        }
+        
         
 
     }
@@ -132,6 +177,7 @@ class EnfermeroController extends Controller
             // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
             
             $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('paciente_id', $pacienteId)->get();
+            
             // dd($pacientes);
             // dd($enfermero->pacientes()->wherePivot('inicio', $inicio)->get());
             $id = $enfermero->id;        
@@ -163,7 +209,7 @@ class EnfermeroController extends Controller
     }
         if(Auth::user()->tipo_usuario_id == 3){
         // dd($request->all());
-        $pacienteId = $request->input('paciente_id');        
+        $pacienteId = $request->input('paciente_id');    
         $inicio = $request->input('inicio');
 
         // dd($request->input('inicio'));
@@ -180,7 +226,7 @@ class EnfermeroController extends Controller
         // $enfermero->pacientes()->updateExistingPivot($pacienteId, $datos);
         
         session()->flash('success', 'Los cambios han sido guardados exitosamente.');
-    return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermero]);
+    return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermeroy]);
         }
         
         
@@ -209,7 +255,6 @@ class EnfermeroController extends Controller
     {
         // dd($request->all());
         // $this->validateWithBag('attach',$request, [
-        //     'paciente_id' => 'required|exists:pacientes,id',
         //     'inicio' => 'required|date_format:Y-m-d\TH:i:s',
         //     'fin' => 'required|date_format:Y-m-d\TH:i:s|after:inicio',
         //     'notas' => 'nullable|string',
@@ -233,14 +278,24 @@ class EnfermeroController extends Controller
 
         public function detach_paciente(Enfermero $enfermero, Paciente $paciente, Request $request)
     {
-        $pacienteId = $paciente->id;
-        $inicio = $request->input('inicio');
-        $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->detach($pacienteId);
+        // $pacienteId = $paciente->id;
+        // $inicio = $request->input('inicio');
+        // $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('pacientes.id', $pacienteId)->detach($pacienteId);
 
-        // dd($pacientes);
+        // // dd($pacientes);
 
+        // $id = Auth::user()->enfermero->id;
+        // $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+        $pacienteId = $request->input('paciente_id');
+        // dd($pacienteId);
         $id = Auth::user()->enfermero->id;
         $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+        $enfermero->pacientes()->detach($request->input('paciente_id'), [
+            'inicio' => $request->input('inicio'),
+            'fin' => $request->input('fin'),
+            'notas' => $request->input('notas'),
+            'estado' => $request->input('estado')
+        ]);
         return view('enfermeros.show',['pacientes' => $pacientes,
         'enfermero' => $enfermero, 'id' => $id, 'paciente' => $paciente]);
     }
