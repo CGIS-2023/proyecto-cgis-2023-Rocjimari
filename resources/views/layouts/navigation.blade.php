@@ -32,12 +32,18 @@
                             </x-nav-link>
                             
                     @endif
-                    @if(Auth::user()->tipo_usuario_id == 1)
+                    @if(Auth::user()->tipo_usuario_id == 4)
                             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
-                            <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.lista') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
+                            <x-nav-link href="/pacientes"  :active="request()->routeIs('pacientes.index') or request()->routeIs('pacientes.create') or request()->routeIs('pacientes.edit') or request()->routeIs('pacientes.show')">
                             {{ __('Pacientes') }}
+                            </x-nav-link>
+                            <x-nav-link href="/enfermeros"  :active="request()->routeIs('enfermeros.index') or request()->routeIs('enfermeros.create') or request()->routeIs('enfermeros.edit') or request()->routeIs('enfermeros.show')">
+                            {{ __('Enfermeros') }}
+                            </x-nav-link>
+                            <x-nav-link href="/medicos"  :active="request()->routeIs('medicos.index') or request()->routeIs('medicos.create') or request()->routeIs('medicos.edit') or request()->routeIs('medicos.show')">
+                            {{ __('Medicos') }}
                             </x-nav-link>
                     @endif
                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Medico;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedicoController extends Controller
 {
@@ -13,25 +14,21 @@ class MedicoController extends Controller
     // public function __construct (Paciente $pacientes){
     //     $this->paciente => $pacientes;
     // }
-    public function __construct()
-    {
-        $this->authorizeResource(Medico::class, 'medico');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Medico::class, 'medico');
+    // }
     
 
 
     public function index(){
         
         $medicos = Medico::all();
-
-                        //->select('nombre','fecha_entrada')
-                        //->where('estado','vivo')
-                        //->distenct()//para que no se repitan
-                        //->get()
-        return view('medicos.lista',['medicos' => $medicos]);
+        return view('medicos.index',['medicos' => $medicos]);
     }
 
     
+
 
     public function create(){
         return view('medicos.create');
@@ -39,9 +36,14 @@ class MedicoController extends Controller
 
 
     public function store(Request $request){
-            Medico::create($request->all());  
-            return redirect()->action([MedicoController::class, 'index']);
-            
+        if (Auth::user()->tipo_usuario_id == 4){
+            $medico = new Medico($request->all());
+            $medico->user_id = 6; // Asignar el user_id del usuario actual
+            $medico->save();
+            session()->flash('success', 'Médico creado correctamente');
+            return redirect()->route('medicos.index');
+            // dd($pacientes);
+        }
         }
     
 

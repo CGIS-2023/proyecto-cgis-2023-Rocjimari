@@ -88,7 +88,7 @@
                         </div>
                         
                         <div class="flex items-center justify-end mt-4">
-                        <form action="{{route('enfermeros.show', $id)}}" method="GET">
+                        <form action="{{route('enfermeros.show', $paciente->id)}}" method="GET">
                             @csrf
                             <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
                             <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">Guardar cambios</button>
@@ -105,18 +105,10 @@
             </div>
         </div>
     </div>   
-              
-        @endif
-
-
-
-        
+    @endif
+          
+            
        
-
- 
-
-       
-        
     
 
 </body>

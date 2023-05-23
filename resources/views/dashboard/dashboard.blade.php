@@ -175,6 +175,8 @@ h3 {
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+  @if (Auth::user()->tipo_usuario_id == 2 || Auth::user()->tipo_usuario_id == 3) 
+
     <center>
 	<div class="mainBox box">
                     <div class="patientsTitle">
@@ -256,11 +258,107 @@ h3 {
                     
 </center>
 
+    @endif
+
+    
+
+    <script src="https://kit.fontawesome.com/762a939896.js" crossorigin="anonymous"></script>
+
+     @if(Auth::user()->tipo_usuario_id == 4)
+                    
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
+    <center>
+	<div class="mainBox box">
+                    <div class="patientsTitle">
+                        <h3>Información completa</h3>
+                        <div class="patientsBox">
+                            <div class="patient box">                             
+                                <div class="patientImage">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/387/387585.png" alt="">
+                                </div>
+                                <div class="name"> <h4>Número pacientes</h4></div>
+                                <div class="status"><p>Conteo de todos los pacientes registrados</p></div>                          
+								<div class="numbers">{{$pacientes}}</div>
+                            </div>
+                            <div class="patient box">                             
+                                <div class="patientImage">
+                                    <img src="https://img.freepik.com/vector-premium/historial-medico-icono-servicios-linea_116137-3643.jpg" alt="">
+                                </div>
+                                <div class="name"> <h4>Número de médicos total</h4></div>
+                                <div class="status"><p>Conteo de todos los médicos registrados</p></div> 
+								<div class="numbers">{{$medicos}}</div>
+
+                            </div>
+                            <div class="patient box">                             
+                                <div class="patientImage">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/568/568038.png?w=740&t=st=1684707274~exp=1684707874~hmac=eccb4e6494b5db34b0462db3b9f943a7ffa51ff7280fa60621a0c561e76eca24" alt="">
+                                </div>
+                                <div class="name"> <h4>Número de enfemeros total</h4></div>                                
+                                <div class="status"><p>Conteo de todos los enfemeros registrados</p></div>
+                                <div class="status"><p></p></div> 
+								<div class="numbers">{{$enfermeros}}</div>
+
+                            </div>
+                          
+                                                    
+                        </div>
+                    </div>
+					<div class="container">
+        
+        <div class="middleSection">
+           
+        <div class="rightSection">
+            <div class="upRow row">
+                <div class="leftBox box">
+                    <h3>May, 2023</h3>
+                    <div class="calendar">
+                        <div class="date">1</div>
+                        <div class="date">2</div>
+                        <div class="date">3</div>
+                        <div class="date">4</div>
+                        <div class="date">5</div>
+                        <div class="date">6</div>
+                        <div class="date">7</div>
+                        <div class="date">8</div>
+                        <div class="date">9</div>
+                        <div class="date">10</div>
+                        <div class="date">11</div>
+                        <div class="date">12</div>
+                        <div class="date">13</div>
+                        <div class="date">14</div>
+                        <div class="date">15</div>
+                        <div class="date">16</div>
+                        <div class="date">17</div>
+                        <div class="date">18</div>
+                        <div class="date">19</div>
+                        <div class="date">20</div>
+                        <div class="date">21</div>
+                        <div class="date">22</div>                        
+                        <div class="date">23</div>
+                        <div class="datehoy">24</div>
+                        <div class="date">25</div>
+                        <div class="date">26</div>
+                        <div class="date">27</div>                        
+                        <div class="date">28</div>
+                        <div class="date">29</div>
+                        <div class="date">30</div>
+                        <div class="date">31</div>
+                        
+                    </div>
+                </div>
+                    
+</center>
+
     
 
     
 
     <script src="https://kit.fontawesome.com/762a939896.js" crossorigin="anonymous"></script>
-    
+    @endif
+</body>
 </body>
 </x-app-layout>

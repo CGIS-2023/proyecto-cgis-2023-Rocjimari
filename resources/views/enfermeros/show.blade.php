@@ -13,7 +13,7 @@
 
 
 </head>
-@if (count($pacientes) === 0)
+@if (count($pacientes) == 0)
 <div style="position: relative; margin: 32px 40px; padding: 60px 20px 16px; border: 2px solid #65e221; border-radius: 10px; background: #ffffff">
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
         <p style="color: red; font-weight: bold;">No hay Consultas registradas para este paciente</p>
@@ -31,11 +31,16 @@
     @include('layouts.navigationsecondary')
 @endonce
 @endforeach
+
 @endif
+
 @if (Auth::user()->tipo_usuario_id == 2)
-@isset($paciente)
-@include('layouts.navigationsecondary')
-@endisset
+@foreach($pacientes as $paciente)    
+@once(!@include('layouts.navigationsecondary')== true)
+    @include('layouts.navigationsecondary')
+@endonce
+@endforeach
+
 @endif
 
 
@@ -226,6 +231,44 @@
                         <label for="apellidos">Apellidos</label>
                         <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos" 
                         value="{{$enfermero-> apellidos}}"required autofocus />
+                    </div>
+
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+            
+        </div>
+        @endif
+        @if (Auth::user()->tipo_usuario_id == 4)
+        <div style="  position: relative; margin: 32px 16px;; padding: 60px 20px 16px;  border:2px solid #dad4ff; ;  border-radius: 10px;  background: #ffffff">
+            <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #7f71d3;  border-radius: 5px;  background: #a59cd8a5;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
+            Enfermero:  {{ $enfermero->apellidos}} ,     {{$enfermero->nombre}} 
+            </div>
+
+
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        
+                        
+                    <div class="py-12">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="nombre" 
+                        value="{{$enfermero-> nombre}}"required autofocus />
+                    </div>
+                    <div class="py-12">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" class="form-control"  readonly disabled class="block mt-1 w-full" name="apellidos" 
+                        value="{{$enfermero-> apellidos}}"required autofocus />
+                    </div>
+                    <div class="flex items-center justify-end mt-4">
+                        <button type="button" class="bg-red-800 hover:bg-red-700">
+                            <a href={{route('enfermeros.index')}}>
+                            {{ __('Volver al listado') }}
+                            </a>
+                        </button>
                     </div>
 
                 </div>

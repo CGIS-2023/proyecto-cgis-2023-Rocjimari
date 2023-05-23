@@ -82,6 +82,84 @@
                 </td>
             </tr>
             @endisset
+             </tbody>
+    </table>
+
+    
+    <div class="card-footer text-muted">
+        <br>
+        <a href="/pacientes/create">Nuevo enfermero</a>
+        <br>
+        <a href="/">Inicio</a>
+    </div>
+        </div>
+    </div>
+            @endif
+             @if (Auth::user()->tipo_usuario_id == 4)
+
+        <div class="card-header">
+            Listado enfermeros
+        </div>
+        <div class="card-body">
+        <table >
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>            
+            <th scope="col">Opciones</th>
+        </tr>
+                
+
+       
+        </thead>
+        <tbody>
+        @foreach($enfermeros as $enfermero)
+            <tr>
+                <td>{{ $enfermero->nombre }}</td>
+                <td>{{ $enfermero->apellidos }}</td>
+                
+                <td>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <form action="/enfermeros/{{$enfermero->id}}">
+                        @csrf
+                        @method('edit')
+                        <input type="hidden" name="enfermero_id" value="{{ $enfermero->id }}">
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Ver</button>
+                        
+
+                    </form>
+                    <form action="/enfermeros/{{$enfermero->id}}/edit">
+                        @csrf
+                        @method('edit')
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Editar</button>
+                    </form>
+                    <form action="/enfermeros/{{$enfermero->id}}" method="POST" onsubmit="return confirm('¿Do you want to delete this?')">
+                        @csrf
+                        @method('delete')
+                        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                            <script>
+                                 $(".specialButton").click(function(){
+                                    return confirm("Do you want to delete this ?");
+                                });
+                            </script>
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Eliminar</button>
+                     </form>
+                </td>
+            </tr>
+              @endforeach
+              </tbody>
+    </table>
+
+    
+   
+           
+             <div class="card-footer text-muted">
+                <br>
+                <a href="/enfermeros/create">Nuevo enfermero</a>
+                <br>
+                <a href="/">Inicio</a>
+            </div>
+                </div>
+            </div>
             @endif
             
             @if (Auth::user()->tipo_usuario_id == 2)
@@ -118,20 +196,22 @@
                 </td>
             </tr>
             @endisset
+             </tbody>
+    </table>
+
+    
+    <div class="card-footer text-muted">
+        <br>
+        <a href="/">Inicio</a>
+    </div>
+        </div>
+    </div>
             @endif
 
         </tbody>
     </table>
 
     
-    <div class="card-footer text-muted">
-        <br>
-        <a href="/pacientes/create">Nuevo enfermero</a>
-        <br>
-        <a href="/">Inicio</a>
-    </div>
-        </div>
-    </div>
     
     
     

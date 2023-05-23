@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('enfermeros', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('apellidos');            
+            $table->string('apellidos');   
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->foreignId('paciente_id')->nullable();
             $table->timestamps();

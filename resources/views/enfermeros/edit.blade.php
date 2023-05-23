@@ -142,6 +142,46 @@
                 </a>
             </button>
         </div> @endif
+        @if (Auth::user()->tipo_usuario_id == 4)
+        <div style="  position: relative; margin: 32px 16px;; padding: 60px 20px 16px;  border:2px solid #dad4ff; ;  border-radius: 10px;  background: #ffffff">
+            <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #7f71d3;  border-radius: 5px;  background: #a59cd8a5;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
+            Enfermero:  {{ $enfermero->apellidos}} ,     {{$enfermero->nombre}} 
+            </div>
+             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <form action="{{ route('enfermeros.update', $enfermero->id) }}" method="POST" role="form">
+                                @csrf
+                                @method('put')
+                                <div class="py-12">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control" class="block mt-1 w-full" name="nombre" 
+                                    value="{{$enfermero-> nombre}}"required autofocus />
+                                </div>
+                                <div class="py-12">
+                                    <label for="apellidos">Apellidos</label>
+                                    <input type="text" class="form-control"  class="block mt-1 w-full" name="apellidos" 
+                                    value="{{$enfermero-> apellidos}}"required autofocus />
+                                </div>
+
+                                 <div class="flex items-center justify-end mt-4">
+                                <button type="submit" class="btn btn-success btn-sm" style="margin-left: 10px">Editar</button>
+                                </div>   
+                                
+                            
+                            
+                       
+                        </form>
+
+                </div>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+            
+        </div>
+         @endif
 
        
         

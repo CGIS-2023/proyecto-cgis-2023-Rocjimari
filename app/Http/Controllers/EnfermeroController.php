@@ -40,12 +40,22 @@ class EnfermeroController extends Controller
             
             return view('enfermeros.index',['enfermeros' => $enfermeros, 'id' => $enfermeroId, 'paciente' => $paciente]);
         }
+        if (Auth::user()->tipo_usuario_id == 4){
+            $pacientes = Paciente::all();
+            // $enfermeros = Enfermero::all(); 
+            $enfermeros = Enfermero::all(); 
+            // dd($paciente->enfermero_id);
+            // dd($enfermeros);
+            
+            
+            return view('enfermeros.index',['enfermeros' => $enfermeros,  'pacientes' => $pacientes]);
+        }
         
         return view('enfermeros.index',['enfermeros' => $enfermeros, 'id' => $id]);
     }
 
 
-    public function show(Request $request,Enfermero $enfermero){
+    public function show(Request $request,Enfermero $enfermero,Medico $medico){
 
         if (Auth::user()->tipo_usuario_id == 3){
             $pacienteId = $request->input('paciente_id');
@@ -54,7 +64,7 @@ class EnfermeroController extends Controller
             // dd($pacienteId);
             $id = Auth::user()->enfermero->id;
             $pacientes = $enfermero->pacientes->where('id',$pacienteId);
-            // dd($enfermero->pacientes);
+            // dd($pacientes);
             // $pacientes = Paciente::wherePivot('', $id)->pluck('id')->unique();
             // $pacientes = Paciente::where('enfermero_id', $id)->where('id',$pacienteId)->get();
             // dd($pacientes);
@@ -69,10 +79,12 @@ class EnfermeroController extends Controller
             return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
         }
         if (Auth::user()->tipo_usuario_id == 2){
-            // dd($request->all());
-            $pacienteId = $request->input('paciente_id');
-            $paciente = Paciente::find($pacienteId);
-            $id = $request->input('enfermero_id');
+            // // dd($request->all());
+            // // $pacienteId = $request->input('paciente_id');
+            // // $paciente = Paciente::find($pacienteId);            
+            // // $pacientes = $medico->pacientes->where('id',$pacienteId);
+            // // $id = $request->input('enfermero_id');         
+            $pacientes = Paciente::all();
             
             // dd($pacienteId);
             // $id = Auth::user()->enfermero->id;
@@ -80,7 +92,14 @@ class EnfermeroController extends Controller
             // dd($request);
         
             
-            return view('enfermeros.show', ['enfermero' => $enfermero, 'paciente' => $paciente,'id'=> $id]);
+            return view('enfermeros.show', ['enfermero' => $enfermero,  'pacientes' => $pacientes]);
+        }
+        if (Auth::user()->tipo_usuario_id == 4){
+            // dd($request->all());
+            $enfermeroId = $request->input('enfermero_id');
+            $enfermero = Enfermero::find($enfermeroId);
+            $pacientes = Paciente::all();
+            return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes]);
         }
         
 
@@ -116,6 +135,17 @@ class EnfermeroController extends Controller
             
             // return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
         }
+        if (Auth::user()->tipo_usuario_id == 4){
+            $enfermero = Auth::user()->enfermero;
+            $pacientes = Paciente::all();
+
+            // dd($pacientes);
+            
+        
+            return view('enfermeros.consulta', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
+            
+            // return view('enfermeros.show', ['enfermero' => $enfermero, 'pacientes' => $pacientes,'id'=> $id]);
+        }
         
         
 
@@ -140,6 +170,14 @@ class EnfermeroController extends Controller
             return redirect()->route('enfermeros.index');
             // dd($pacientes);
         }
+        if (Auth::user()->tipo_usuario_id == 4){
+            $enfermero = new Enfermero($request->all());
+            $enfermero->user_id = 6; // Asignar el user_id del usuario actual
+            $enfermero->save();
+            session()->flash('success', 'Consulta creada correctamente');
+            return redirect()->route('enfermeros.index');
+            // dd($pacientes);
+        }
 
     }
     
@@ -153,7 +191,7 @@ class EnfermeroController extends Controller
 
     
     
-    public function edit(Request $request)
+    public function edit(Request $request, Enfermero $enfermero)
     {
         if(Auth::user()->tipo_usuario_id == 2){
             // dd($request->all());
@@ -167,18 +205,28 @@ class EnfermeroController extends Controller
             // dd($request->input()); 
             return view('enfermeros/edit', ['enfermero' => $enfermero,  'pacientes' => $pacientes,'id' => $id]);
         }
+        
+        if(Auth::user()->tipo_usuario_id == 4){
+            
+            return view('enfermeros/edit', ['enfermero' => $enfermero]);
+          
+            
+        }
         if(Auth::user()->tipo_usuario_id == 3){
+            
             $pacienteId = $request->input('paciente_id');
             $inicio = $request->input('pivot_inicio');
-            // dd($request->input());
+           
+
 
             $enfermero = Auth::user()->enfermero;
             // dd($request->input());
             // $pacientes = $enfermero->pacientes->where('pivot_paciente_id',$pacienteId)->where('pivot_inicio',$inicio);
+            // dd($enfermero->pacientes());
+            $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('paciente_id', $pacienteId)->get()->unique();
+
             
-            $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('paciente_id', $pacienteId)->get();
-            
-            // dd($pacientes);
+            // dd( $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('paciente_id', $pacienteId)->get());
             // dd($enfermero->pacientes()->wherePivot('inicio', $inicio)->get());
             $id = $enfermero->id;        
             return view('enfermeros/edit', ['enfermero' => $enfermero,  'pacientes' => $pacientes,'id' => $id, 'paciente_id' => $pacienteId]);
@@ -207,6 +255,7 @@ class EnfermeroController extends Controller
         return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermero]);
         
     }
+    
         if(Auth::user()->tipo_usuario_id == 3){
         // dd($request->all());
         $pacienteId = $request->input('paciente_id');    
@@ -226,9 +275,15 @@ class EnfermeroController extends Controller
         // $enfermero->pacientes()->updateExistingPivot($pacienteId, $datos);
         
         session()->flash('success', 'Los cambios han sido guardados exitosamente.');
-    return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermeroy]);
+    return view('enfermeros.show',['id' => $enfermero_id, 'pacientes' => $pacientes, 'enfermero' => $enfermero]);
         }
-        
+        if(Auth::user()->tipo_usuario_id == 4){
+        $enfermero = Enfermero::find($enfermero->id);
+        // dd($enfermero);
+        $enfermero->fill($request->all());// los actualiza
+        $enfermero->save();//se guarda
+        return redirect()->action([EnfermeroController::class, 'index']);
+        }
         
         
     
@@ -242,7 +297,7 @@ class EnfermeroController extends Controller
         $enfermero->delete();
         return redirect()->action([EnfermeroController::class, 'index']);
         }
-        if(Auth::user()->tipo_usuario_id == 3){
+        if(Auth::user()->tipo_usuario_id == 4){
             $enfermero = Enfermero::find($id);
             $enfermero->delete();
             return redirect()->action([EnfermeroController::class, 'index']);
@@ -265,6 +320,7 @@ class EnfermeroController extends Controller
         // dd($pacienteId);
         $id = Auth::user()->enfermero->id;
         $pacientes = Auth::user()->enfermero->pacientes->where('id',$pacienteId);
+        // dd($pacientes);
         $enfermero->pacientes()->attach($request->input('paciente_id'), [
             'inicio' => $request->input('inicio'),
             'fin' => $request->input('fin'),

@@ -87,6 +87,7 @@
                     <form action="/pacientes/{{$paciente->id}}/edit">
                         @csrf
                         @method('edit')
+                        <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
                         <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 10px">Editar</button>
                     </form>
                     </form>
@@ -109,11 +110,7 @@
                             <input type="hidden" name="paciente" value="{{ $paciente }}">
                             <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Consulta</button>
                         </form>
-                          
-                        @endif
-                        
-                        
-
+                        @endif        
                     <br>
                 </td>
             </tr>
@@ -132,8 +129,13 @@
         
         </div>
     </div>
-    
-    
+                        
+            @if (Auth::user()->tipo_usuario_id == 2)
+           
+
+       
+    @endif
+
     
     </body>
 </html>

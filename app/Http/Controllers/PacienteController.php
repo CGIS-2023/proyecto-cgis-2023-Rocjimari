@@ -41,16 +41,12 @@ class PacienteController extends Controller
             
 
         }
-        elseif(Auth::user()->tipo_usuario_id == 1){
-
+        elseif(Auth::user()->tipo_usuario_id == 4){
+            $id = Auth::user()->id;
             $pacientes = Paciente::all();  
+            $id = Auth::user()->id;
 
         }
-
-                        //->select('nombre','fecha_entrada')
-                        //->where('estado','vivo')
-                        //->distenct()//para que no se repitan
-                        //->get()
         return view('pacientes.lista',['pacientes' => $pacientes, 'id' => $id]);
     }
 
@@ -112,6 +108,11 @@ class PacienteController extends Controller
                 $medico = Auth::user()->medico;
                 $enfermeros = Enfermero::all();
                 return view('pacientes.create',[ 'medico' => $medico, 'enfermeros'=> $enfermeros]);
+            }
+            if (Auth::user()->tipo_usuario_id == 4){
+                $medicos = Medico::all();
+                $enfermeros = Enfermero::all();
+                return view('pacientes.create',[ 'medicos' => $medicos, 'enfermeros'=> $enfermeros]);
             }
     }
 

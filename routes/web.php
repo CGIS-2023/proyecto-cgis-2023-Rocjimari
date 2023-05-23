@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
         // 'enfermedad' => EnfermedadController::class,
     ]);
 });
+
 // Route::middleware('auth')->group(function(){//autentificar usuario
 
     // Route::get('/pacientes/{paciente_id}/equipamientos', [EquipamientoController::class, 'show'])->name('equipamiento.show');
@@ -86,7 +87,7 @@ Route::get('pacientes/{paciente}/medico',[ PacienteController::class, 'mostrarMe
 //Consultas de enfermero a un paciente específico
 // Route::get('pacientes/{paciente}/enfermeros/{id}',[ EnfermeroController::class, 'consultaEnfermero'])->name('pacientes.enfermeroConsulta');
 
-Route::get('dashboard', [DashboardController::class, 'count'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'count'])->name('dashboard');
 
 //
 Route::post('/enfermeros/{enfermero}/attach-paciente', [EnfermeroController::class, 'attach_paciente'])
