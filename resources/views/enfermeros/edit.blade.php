@@ -13,86 +13,17 @@
 
 </head>
 <body>
-<br>
 
 
 @if (Auth::user()->tipo_usuario_id == 3)
 
-Editar Enfermero: {{$enfermero-> nombre}}
-
- <form method="POST" role="form" action="{{ route('enfermeros.attachPaciente', [$enfermero->id]) }}">
-    {{ csrf_field()}} 
-    <div class="mt-4">
-        <x-label for="paciente_id" :value="__('Paciente')" />
-            <select id="paciente_id" name="paciente_id" required>
-                <option value="">{{__('Elige un Paciente')}}</option>
-                @foreach ($pacientes as $paciente)
-                <option value="{{$paciente->id}}" @if (old('paciente_id') == $paciente->id) selected @endif>{{$paciente->nombre}} </option>
-                @endforeach
-            </select>
-    </div>
-
-                        <div class="mt-4">
-                            <x-label for="inicio" :value="__('Inicio de la consulta')" />
-
-                            <input id="inicio" class="block mt-1 w-full"
-                                     type="datetime-local"
-                                     name="inicio"
-                                     :value="old('inicio')"
-                                     required />
-                        </div>
-
-                        <div class="mt-4">
-                            <x-label for="fin" :value="__('Fin de la consulta')" />
-
-                            <input id="fin" class="block mt-1 w-full"
-                                     type="datetime-local"
-                                     name="fin"
-                                     :value="old('fin')"
-                                     required />
-                        </div>
-
-                        <div class="mt-4">
-                            <x-label for="estado" :value="__('Estado')" />
-
-
-                            <select id="estado" name="estado" required>
-                                <option value="">{{__('Elige una opción')}}</option>
-                                <option value="Empeoramiento" @if (old('estado') == 'Empeoramiento') selected @endif>Empeoramiento</option>
-                                <option value="Continua estable" @if (old('estado') == 'Continua estable') selected @endif>Continua estable</option>
-                                <option value="Mejorando" @if (old('estado') == 'Mejorando') selected @endif>Mejorando</option>
-                                <option value="Crítico" @if (old('estado') == 'Crítico') selected @endif>Crítico</option>
-                                <option value="Recuperado" @if (old('estado') == 'Recuperado') selected @endif>Recuperado</option>
-                                <option value="En tratamiento" @if (old('estado') == 'En tratamiento') selected @endif>En tratamiento</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <x-label for="notas" :value="__('Notas')" />
-
-                            <input id="notas" class="block mt-1 w-full" type="text" name="notas" :value="old('notas')" />
-                        </div>
-
-                        <div class="flex items-center justify-end mt-4">
-                            <button type="button" class="bg-red-800 hover:bg-red-700">
-                                <a href={{route('medicos.index')}}>
-                                    {{ __('Cancelar') }}
-                                </a>
-                            </button>
-                            <button class="ml-4">
-                                {{ __('Guardar') }}
-                            </button>
-                        </div>
-
-                           
-        </form>
 
     @foreach($pacientes as $paciente)
     @once(!@include('layouts.navigationsecondary')== true)
         @include('layouts.navigationsecondary')
     @endonce
 
-    <div style="  position: relative; margin: 32px 40px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
+    <div style="  position: relative; margin: 32px 100px;; padding: 60px 20px 16px;  border:2px solid #65e221; ;  border-radius: 10px;  background: #ffffff">
         <div style="position: absolute; top: 16px;   left: 50px;  line-height: 32px;  padding-left: 275px;  padding-right: 275px;  border: 2px solid #57d116;  border-radius: 5px;  background: #bcff3fc3;  font-weight: bold;  font-size: 17px;  text-align: center; font-family: sans-serif ">
         Paciente: {{$paciente->apellidos}},  {{$paciente->nombre}}
         </div>
@@ -103,24 +34,54 @@ Editar Enfermero: {{$enfermero-> nombre}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     
-                    
-                    <div class="flex items-center">
-                        <x-label for="inicio">Inicio</x-label>
-                        <input disabled type="datetime-local" name="fecha_entrada" value = "{{$paciente->pivot->inicio->format('Y-m-d\TH:i:s')}}" >
+                     <form action="{{ route('enfermeros.update', $enfermero->id) }}" method="POST" role="form">
+                                @csrf
+                                @method('put')
+                     <div class="mt-4">
+                        <x-label for="paciente_id" :value="__('Paciente')" />
+                            <select id="paciente_id" name="paciente_id" disable>
+                                @foreach ($pacientes as $paciente)
+                                <option value="{{$paciente->id}}" @if (old('paciente_id') == $paciente_id) selected @endif>{{$paciente->nombre}} </option>
+                                @endforeach
+                            </select>
                     </div>
-                    <div class="flex items-center">
+                    <div class="mt-4">
+                        <x-label for="inicio">Inicio</x-label>
+                        <input  type="datetime-local" name="inicio" value = "{{$paciente->pivot->inicio->format('Y-m-d\TH:i:s')}}" >
+                    </div>
+                    
+                    <div class="mt-4">
                         <x-label for="fin">Fin</x-label>
-                        <input disabled type="datetime-local" name="fecha_entrada" value = "{{$paciente->pivot->fin->format('Y-m-d\TH:i:s')}}" >
+                        <input  type="datetime-local" name="fin" value = "{{$paciente->pivot->fin->format('Y-m-d\TH:i:s')}}" >
                     </div>
                     <div class="mt-4">
                         <x-label for="estado">Estado</x-label>
-                        <input class="block mt-1 w-full" type="text"   readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->estado}}"required autofocus />
+                        <select id="estado" name="estado" required autofocus>
+                        
+                                <option value="">{{__('Elige una opción')}}</option>
+                                <option value="Empeoramiento" @if ($paciente->pivot->estado == 'Empeoramiento') selected @endif>Empeoramiento</option>
+                                <option value="Continua estable" @if ($paciente->pivot->estado == 'Continua estable') selected @endif>Continua estable</option>
+                                <option value="Mejorando" @if ($paciente->pivot->estado == 'Mejorando') selected @endif>Mejorando</option>
+                                <option value="Crítico" @if ($paciente->pivot->estado == 'Crítico') selected @endif>Crítico</option>
+                                <option value="Recuperado" @if ($paciente->pivot->estado == 'Recuperado') selected @endif>Recuperado</option>
+                                <option value="En tratamiento" @if ($paciente->pivot->estado == 'En tratamiento') selected @endif>En tratamiento</option>
+                            </select>
                     </div>
                     <div class="mt-4">
                         <x-label for="notas">Notas</x-label>
-                        <input class="block mt-1 w-full" type="text"  readonly disabled class="block mt-1 w-full" name="nombre"  value="{{$paciente->pivot->notas}}"required autofocus />
+                        <input class="block mt-1 w-full" type="text"   class="block mt-1 w-full" name="notas"  value="{{$paciente->pivot->notas}}"required autofocus />
                     </div>
+                    <div class="flex items-center justify-end mt-4">
+                            <input type="hidden" name="paciente_id" value="{{ $paciente->pivot->paciente_id }}">
+                            <button type="submit"  class="btn btn-success btn-sm" style="margin-left: 10px">Guardar</button>
+                       
+                            <a href="{{ route('medicos.index') }}" class="btn btn-danger btn-sm" style="margin-left: 10px">{{ __('Cancelar') }}</a>
+                            <br>
+                    </div>
+                    </form>
                     
+                    
+                   
 
                 </div>
                 </div>
@@ -129,17 +90,10 @@ Editar Enfermero: {{$enfermero-> nombre}}
             </div>
     
             @endforeach
-            <div class="flex items-center justify-end mt-4">
-                <button type="button" class="bg-red-800 hover:bg-red-700">
-                    <a href={{route('enfermeros.index')}}>
-                    {{ __('Volver al listado') }}
-                    </a>
-                </button>
             
-            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                <a href="{{route('enfermeros.edit', $enfermero->id)}}">Editar</a>
-            </div>
-            </div>
+
+                           
+        
 @endif
 
 
@@ -180,17 +134,17 @@ Editar Enfermero: {{$enfermero-> nombre}}
         </div>
             
         </div>
-        @endif
-
-       
-        <br>
+       <br>
         <div class="flex items-center justify-end mt-4">
             <button type="button" class="bg-red-800 hover:bg-red-700">
                 <a href={{route('enfermeros.index')}}>
                 {{ __('Volver al listado') }}
                 </a>
             </button>
-        </div>
+        </div> @endif
+
+       
+        
         
     
 </body>

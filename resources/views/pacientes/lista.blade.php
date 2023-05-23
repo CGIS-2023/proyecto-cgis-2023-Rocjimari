@@ -106,6 +106,7 @@
                         <form action="/enfermeros/{{$id}}" method="GET">
                             @csrf
                             <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                            <input type="hidden" name="paciente" value="{{ $paciente }}">
                             <button type="submit" class="btn btn-primary btn-sm"style="margin-left: 10px">Consulta</button>
                         </form>
                           

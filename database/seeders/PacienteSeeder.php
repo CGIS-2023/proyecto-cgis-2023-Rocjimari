@@ -73,7 +73,7 @@ class PacienteSeeder extends Seeder
                 ],
             [
             'nombre' => "Paula",   
-            'apellido' => 'Peres Castro',            
+            'apellido' => 'Pérez Castro',            
             'sexo' => 'Mujer',
             'edad' => 34,
             'fecha_entrada' => '2021-05-30 10:15:00',               
@@ -92,6 +92,14 @@ class PacienteSeeder extends Seeder
             [
                 'paciente_id' => 1,
                 'enfermero_id' => 2,
+                'inicio' => '2021-05-31 10:15:00',
+                'fin' => '2021-06-07 12:15:00',
+                'estado' => "Empeoramiento",
+                'notas' => 'El paciente sufrío una parada cardiaca ',
+            ],
+            [
+                'paciente_id' => 5,
+                'enfermero_id' => 1,
                 'inicio' => '2021-05-31 10:15:00',
                 'fin' => '2021-06-07 12:15:00',
                 'estado' => "Empeoramiento",
