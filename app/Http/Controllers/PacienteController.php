@@ -23,7 +23,12 @@ class PacienteController extends Controller
         // dd($paciente->user);
         // dd(Auth::user()->enfermero->id);
         if (Auth::user()->tipo_usuario_id == 3){
-            $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
+            
+            $id = Auth::user()->enfermero->id;
+            // dd($id);
+            $pacientes = Paciente::where('enfermero_id', $id)->pluck('id')->unique();
+            $pacientes = Paciente::whereIn('id', $pacientes)->get();
+
             // dd($pacientes);
             $id = Auth::user()->enfermero->id;
             
@@ -117,7 +122,8 @@ class PacienteController extends Controller
     
         // dd($request->all());
         Paciente::create($request->all());
-        // dd($paciente);
+        // Paciente::all()->where('enfermero_id',$request->enfermero_id )
+        // dd($pacientes->where('enfermero_id',$request->enfermero_id ));
         
 
         return redirect()->route('pacientes.index')->with('success', 'Paciente creado exitosamente.');

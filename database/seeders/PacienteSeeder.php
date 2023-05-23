@@ -71,6 +71,21 @@ class PacienteSeeder extends Seeder
             'enfermero_id' => 2,
 
                 ],
+            [
+            'nombre' => "Paula",   
+            'apellido' => 'Peres Castro',            
+            'sexo' => 'Mujer',
+            'edad' => 34,
+            'fecha_entrada' => '2021-05-30 10:15:00',               
+            'fecha_salida' => '2021-05-30 10:15:00',
+            'estado' => 'Vivo',
+            'estado_salud_inicial' => 'Agudo',
+            'medico_id' => 1,            
+            'enfermero_id' => 1,
+            
+
+
+            ],
         ]);
         
             DB::table('enfermero_paciente')->insert([

@@ -13,10 +13,10 @@ class EnfermeroController extends Controller
 {
     
 
-    public function __construct()
-    {
-        $this->authorizeResource(Enfermero::class, 'enfermero');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Enfermero::class, 'enfermero');
+    // }
 
     public function index(Request $request){
         
@@ -88,11 +88,11 @@ class EnfermeroController extends Controller
             // dd($pacientes);
             }
         if (Auth::user()->tipo_usuario_id == 3){
-        $enfermero = new Enfermero($request->all());
-        $enfermero->save();
-        session()->flash('success', 'Consulta creada correctamente');
-        return redirect()->route('enfermeros.index');
-        // dd($pacientes);
+            $enfermero = new Enfermero($request->all());
+            $enfermero->save();
+            session()->flash('success', 'Consulta creada correctamente');
+            return redirect()->route('enfermeros.index');
+            // dd($pacientes);
         }
 
     }
