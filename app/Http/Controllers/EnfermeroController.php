@@ -170,7 +170,7 @@ class EnfermeroController extends Controller
         $enfermero_id = Auth::user()->enfermero->id;
         $datos = $request->all();
         // dd($datos);
-        $pacientes = $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('paciente_id', $pacienteId)->get();
+        $pacientes = $enfermero->pacientes()->where('paciente_id', $pacienteId)->get();
         // dd($pacientes);
         $enfermero = Enfermero::find($enfermero_id);
         $enfermero->pacientes()->wherePivot('inicio', $inicio)->where('paciente_id', $pacienteId)->updateExistingPivot($pacienteId, $datos);
