@@ -12,11 +12,11 @@ class DashboardController extends Controller
 {
     public function count(){
         if (Auth::user()->tipo_usuario_id == 3){
-            // $id = Auth::user()->enfermero->id;
-            // // dd($id);
-            // $pacientes = Paciente::where('enfermero_id', $id)->pluck('id')->unique();
-            // $pacientes = Paciente::whereIn('id', $pacientes)->get();
-            $pacientes = Auth::user()->enfermero->pacientes()->paginate()->unique();
+            
+            $enfermero_id = Auth::user()->enfermero->id;
+            $pacientes = Paciente::all()->where('enfermero_id',$enfermero_id)->unique();
+            // dd($pacientes);
+
             $countp = $pacientes->count();
             $consultas = Auth::user()->enfermero->pacientes->count();
             
@@ -24,7 +24,8 @@ class DashboardController extends Controller
             
     }
     if (Auth::user()->tipo_usuario_id == 2){
-        $pacientes = Auth::user()->medico->pacientes()->paginate()->unique();
+        $medico_id = Auth::user()->medico->id;
+        $pacientes = Paciente::all()->where('medico_id',$enfermero_id)->unique();
         $countp = $pacientes->count();
         $consultas = Auth::user()->medico->pacientes->count();
         
