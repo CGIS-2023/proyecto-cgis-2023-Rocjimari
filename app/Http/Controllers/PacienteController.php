@@ -30,7 +30,6 @@ class PacienteController extends Controller
             $pacientes = Paciente::whereIn('id', $pacientes)->get();
 
             // dd($pacientes);
-            $id = Auth::user()->enfermero->id;
             
 
         }
@@ -101,6 +100,7 @@ class PacienteController extends Controller
         public function create(){
             if (Auth::user()->tipo_usuario_id == 3){
                 $enfermero = Auth::user()->enfermero;
+                // dd(Auth::user()->enfermero-);
                 $medicos = Medico::all();
                 return view('pacientes.create',[  'medicos' => $medicos, 'enfermero'=> $enfermero]);
             }
@@ -122,6 +122,7 @@ class PacienteController extends Controller
     {
     
         // dd($request->all());
+        // dd(Paciente::create($request->all()));
         Paciente::create($request->all());
         // Paciente::all()->where('enfermero_id',$request->enfermero_id )
         // dd($pacientes->where('enfermero_id',$request->enfermero_id ));

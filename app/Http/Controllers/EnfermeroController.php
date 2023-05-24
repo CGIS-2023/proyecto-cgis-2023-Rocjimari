@@ -60,8 +60,8 @@ class EnfermeroController extends Controller
         if (Auth::user()->tipo_usuario_id == 3){
             $pacienteId = $request->input('paciente_id');
             // dd($request->input());
-
             // dd($pacienteId);
+            // dd($enfermero->pacientes);
             $id = Auth::user()->enfermero->id;
             $pacientes = $enfermero->pacientes->where('id',$pacienteId);
             // dd($pacientes);

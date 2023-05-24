@@ -117,12 +117,16 @@
         @endforeach
         </tbody>
     </table>
+    
+
     <div class="card-footer text-muted">
         <br>
         <a href="/pacientes/create">Nuevo paciente</a>
         <br>
+         @if (Auth::user()->tipo_usuario_id == 3)
         <a href='/consulta' >Añadir consulta</a>
         <br>
+        @endif
         <a href="/">Inicio</a>
         
     </div>
